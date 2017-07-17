@@ -16,3 +16,7 @@ Workflow:
 6. nodejs will select one of this names randomized
 7. Gdrive will now return the public URL which will be sent to client
 8. Client takes this URL and will show the image
+
+
+Some ideas:
+* http://thejackalofjavascript.com/developing-a-mean-app-with-angular-2-0/
