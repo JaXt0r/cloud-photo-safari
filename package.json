@@ -2,14 +2,20 @@
   "name": "cloud-picture-frame",
   "version": "0.0.0",
   "license": "MIT",
+
+
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "swagger-open": "swagger_swagger_fileName=server/api/swagger/swagger.yaml swagger project open",
+    "swagger-edit": "swagger_swagger_fileName=server/api/swagger/swagger.yaml swagger project edit"
   },
+
+
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.0.0",
@@ -26,6 +32,7 @@
     "core-js": "^2.4.1",
     "express": "^4.15.3",
     "rxjs": "^5.4.1",
+    "swagger-express-mw": "^0.7.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
