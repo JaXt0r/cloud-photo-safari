@@ -1,22 +1,28 @@
-# cloud-picture-frame
+# CloudPictureFrame
 
-Playground to create a Raspberry PI solution which can:
-* Server: NodeJS
-* Commandline: Gdrive
-* Cloudspace: Google Drive (15 GB free)
-* Client: Angular2
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.3.
 
+## Development server
 
-Workflow:
-1. PC boots with chromium in Fullscreen mode with
-2. a url like localhost/picture_frame
-3. The page will call itself every 5 minutes (for requesting a new image)
-4. Server side is nodejs which calls Gdrive
-5. Gdrive reads all files in a dedicated folder and
-6. nodejs will select one of this names randomized
-7. Gdrive will now return the public URL which will be sent to client
-8. Client takes this URL and will show the image
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Code scaffolding
 
-Some ideas:
-* http://thejackalofjavascript.com/developing-a-mean-app-with-angular-2-0/
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
