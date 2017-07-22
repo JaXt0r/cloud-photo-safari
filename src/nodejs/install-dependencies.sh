@@ -1,1 +1,0 @@
-npm install shelljs --no-bin-links
