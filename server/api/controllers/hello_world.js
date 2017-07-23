@@ -35,9 +35,8 @@ module.exports = {
   Param 2: a handle to the response object
  */
 function hello(req, res) {
-  console.log(req.query);
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  var name = req.query.name.value || 'stranger';
+  var name = req.swagger.params.name.value || 'stranger';
   var hello = util.format('Hello, %s!', name);
 
   // this sends back a JSON response which is a single string
