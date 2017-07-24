@@ -6,6 +6,13 @@ var express = require('express');
 var app = express();
 
 
+/**
+ * Export globals. Handle with care...
+ * @see https://gist.github.com/branneman/8048520
+ */
+global.__userConfig = require('./user-config');
+
+
 module.exports = app; // for testing
 
 

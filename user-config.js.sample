@@ -1,0 +1,8 @@
+var userConfig = {};
+userConfig.gdrive = {}
+
+userConfig.gdrive.key = '';
+
+
+
+module.exports = userConfig;

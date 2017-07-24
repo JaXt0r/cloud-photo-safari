@@ -1,14 +1,18 @@
 'use strict';
 
-var util = require('util');
+//var userConfig = require('userConfig');
 
 module.exports = {
   getImage: getImage
 };
 
 
+
 function getImage(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
+
+// FIXME DEBUG
+console.log(__userConfig);
 
 
   var response = {};

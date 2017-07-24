@@ -40,4 +40,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+# Project specific ignores
 .Trash-1000/
+user-config.js
