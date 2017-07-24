@@ -1,8 +1,9 @@
-var userConfig = {};
-userConfig.gdrive = {}
+module.exports = {
 
-userConfig.gdrive.key = '';
+  gdrive: {
+    clientid:     '',
+    clientSecret: '',
+    redirectUrl:  'localhost'
+  }
 
-
-
-module.exports = userConfig;
+}
