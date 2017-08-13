@@ -1,9 +1,8 @@
 module.exports = {
 
-  gdrive: {
-    clientid:     '',
-    clientSecret: '',
-    redirectUrl:  'localhost'
+  googleapis: {
+    "clientId": "",
+    "clientSecret": ""
   }
 
 }

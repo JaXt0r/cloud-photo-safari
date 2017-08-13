@@ -12,6 +12,10 @@ var app = express();
  */
 global.__userConfig = require('./user-config');
 
+global.__paths = {
+  root: path.join(__dirname, '/'),
+  modules: path.join(__dirname, '/node_modules/')
+};
 
 module.exports = app; // for testing
 
