@@ -10,7 +10,6 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "swagger-open": "swagger_swagger_fileName=server/api/swagger/swagger.yaml swagger project open",
     "swagger-edit": "swagger_swagger_fileName=server/api/swagger/swagger.yaml swagger project edit"
   },
