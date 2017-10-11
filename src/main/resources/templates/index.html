@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="de">
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Spring Framework Guru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}" rel="stylesheet" media="screen"/>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
+
+
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Login to Your Account</h1><br/>
+    <form>
+        <input type="text" name="user" placeholder="Username" class="form-control"/>
+        <input type="password" name="pass" placeholder="Password" class="form-control"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+    <div class="login-help">
+        <a href="#">Register</a> - <a href="#">Forgot Password</a>
+    </div>
+</div>
+
+</body>
+</html>
