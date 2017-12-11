@@ -1,4 +1,4 @@
-package de.dwbn.registration.controllers;
+package de.mdaehner.cloud_photo_safari.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
