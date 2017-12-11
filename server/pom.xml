@@ -17,7 +17,6 @@
     <properties>
         <java.version>1.8</java.version>
         <kotlin.version>1.1.2-5</kotlin.version>
-        <jackrabbit.version>2.15.3</jackrabbit.version>
     </properties>
 
 
@@ -42,42 +41,6 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-core</artifactId>
-            <version>${jackrabbit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-jcr2dav</artifactId>
-            <version>${jackrabbit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache</groupId>
-            <artifactId>jackrabbit-ocm</artifactId>
-            <version>2.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- The org.apache:jackrabbit-ocm:2.0.0 delivers cglib:cglib:2.2 which does not compile when Kotlin is in charge. Therefore we use this version -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.2.5</version>
-        </dependency>
-
-        <!-- required for org.apache.jackrabbit:jackrabbit-jcr2dav:2.15.3. Because delivered 3.2.2 won't compile! -->
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
