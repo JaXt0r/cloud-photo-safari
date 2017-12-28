@@ -3,3 +3,5 @@
 
 # Folder
 .idea/
+.flickrAuth/
+target/
