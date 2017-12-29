@@ -1,6 +1,21 @@
 page-home {
   ion-content {
     background: url('/assets/imgs/tree-dummy.jpg') no-repeat center top fixed;
-    background-size: cover;  
+    background-size: cover;
+  }
+}
+
+.home-action-sheet-container {
+  button {
+    float: left;
+    width: auto;
+  }
+
+  .action-sheet-group {
+    overflow: hidden;
+  }
+
+  .action-sheet-wrapper {
+    max-width: 800px;
   }
 }
