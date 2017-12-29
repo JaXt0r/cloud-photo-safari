@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController } from 'ionic-angular';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   selector: 'page-home',
@@ -19,7 +20,10 @@ export class HomePage {
         cssClass: 'home-action-sheet-container',
         buttons: [
           {
-            icon: 'settings'
+            icon: 'settings',
+            handler: () => {
+              this.navCtrl.push(SettingsPage);
+            }
           },
           {
             icon: 'folder-open'

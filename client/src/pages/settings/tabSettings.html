@@ -1,0 +1,45 @@
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>
+      Helligkeit
+    </ion-list-header>
+
+    <ion-item>
+      <ion-range min="20" max="80" step="2">
+        <ion-icon small range-left name="sunny"></ion-icon>
+        <ion-icon range-right name="sunny"></ion-icon>
+      </ion-range>
+    </ion-item>
+  </ion-list>
+
+  <ion-list padding>
+    <ion-list-header>
+      Bildfrequenz
+    </ion-list-header>
+
+    <ion-range min="5" max="30" step="5" snaps="true">
+      <ion-icon range-left small name="speedometer"></ion-icon>
+      <ion-icon range-right name="speedometer"></ion-icon>
+    </ion-range>
+  </ion-list>
+
+  <ion-list padding>
+    <ion-list-header>
+      <ion-icon name="timer" item-start></ion-icon>
+      An/Aus Zeiten
+    </ion-list-header>
+
+    <ion-item>
+      <ion-range dualKnobs="true" pin="true">
+        <ion-label range-left>-0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+      <ion-range dualKnobs="true" pin="true">
+        <ion-label range-left>-0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

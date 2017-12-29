@@ -1,3 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
 <ion-content padding>
-  <h3>Settings</h3>
+  <ion-tabs>
+    <ion-tab [root]="settingsRoot" tabTitle="Settings" tabIcon="settings"></ion-tab>
+    <ion-tab [root]="folderRoot" tabTitle="Folder" tabIcon="folder"></ion-tab>
+  </ion-tabs>
 </ion-content>
