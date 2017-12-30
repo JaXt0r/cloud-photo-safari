@@ -38,6 +38,14 @@
     </dependency>
 
     <dependency>
+      <groupId>com.googlecode.jmapper-framework</groupId>
+      <artifactId>jmapper-core</artifactId>
+      <!-- Need to use CR2 candidate, because previous version throws linkage error: https://github.com/jmapper-framework/jmapper-core/issues/60 -->
+      <version>1.6.1.CR2</version>
+    </dependency>
+
+
+    <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk8</artifactId>
       <version>${kotlin.version}</version>
