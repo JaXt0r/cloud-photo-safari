@@ -2,14 +2,18 @@ import { Component } from '@angular/core';
 import { NavController, ActionSheetController } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
 
+import { RestService } from '../../services/restService';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public alertCtrl: ActionSheetController) {
-
+  constructor(public navCtrl: NavController, public alertCtrl: ActionSheetController, rest: RestService) {
+    rest.getPhotosets().then(d => {
+      console.log(d)
+    });
   }
 
 
