@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController } from 'ionic-angular';
-import { SettingsPage } from '../settings/settings';
+import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
 
-import { RestService } from '../../services/restService';
+import { FolderSwitcher } from './folderSwitcher/folderSwitcher';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   selector: 'page-home',
@@ -10,53 +10,52 @@ import { RestService } from '../../services/restService';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public alertCtrl: ActionSheetController, rest: RestService) {
-    rest.getPhotosets().then(d => {
-      console.log(d)
-    });
-  }
-
+  constructor(
+    public navCtrl: NavController,
+    public alertCtrl: ActionSheetController, private modalCtrl: ModalController
+  ) {}
 
 
   displayMenu() {
-      let actionSheet = this.alertCtrl.create({
-        title: 'Landschaften',
-        cssClass: 'home-action-sheet-container',
-        buttons: [
-          {
-            icon: 'settings',
-            handler: () => {
-              this.navCtrl.push(SettingsPage);
-            }
-          },
-          {
-            icon: 'folder-open'
-          },
-          {
-            icon: 'shuffle'
-          },
-          {
-            icon: 'pause'
-          },
-          {
-            icon: 'skip-backward'
-          },
-          {
-            icon: 'skip-forward'
-          },
-          {
-            icon: 'copy'
-          },
-          {
-            icon: 'move'
-          },
-          {
-            icon: 'trash'
+    this.alertCtrl.create({
+      title: 'Landschaften',
+      cssClass: 'home-action-sheet-container',
+      buttons: [
+        {
+          icon: 'settings',
+          handler: () => {
+            this.navCtrl.push(SettingsPage);
           }
-        ]
-      });
-
-      actionSheet.present();
-
-    }
+        },
+        {
+          icon: 'folder-open',
+          handler: () => {
+            let folderModal = this.modalCtrl.create(FolderSwitcher);
+            folderModal.present();
+          }
+        },
+        {
+          icon: 'shuffle'
+        },
+        {
+          icon: 'pause'
+        },
+        {
+          icon: 'skip-backward'
+        },
+        {
+          icon: 'skip-forward'
+        },
+        {
+          icon: 'copy'
+        },
+        {
+          icon: 'move'
+        },
+        {
+          icon: 'trash'
+        }
+      ]
+    }).present();
+  }
 }

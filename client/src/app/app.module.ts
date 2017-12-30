@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { FolderSwitcher } from '../pages/home/folderSwitcher/folderSwitcher';
+
 import { SettingsPage, TabSettings, TabFolder } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -16,7 +18,9 @@ import { RestService } from '../services/restService';
 @NgModule({
   declarations: [
     MyApp,
+    // HomePage
     HomePage,
+    FolderSwitcher,
     // SettingsPage
     SettingsPage,
     TabSettings,
@@ -30,7 +34,9 @@ import { RestService } from '../services/restService';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    // HomePage
     HomePage,
+    FolderSwitcher,
     // SettingsPage
     SettingsPage,
     TabSettings,
