@@ -5,7 +5,5 @@ import com.googlecode.jmapper.annotations.JGlobalMap
 
 @JGlobalMap
 class PhotoData {
-
     lateinit var id: String
-
 }

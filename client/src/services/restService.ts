@@ -11,7 +11,16 @@ export class RestService {
 
   getPhotosets() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/photosets/list').subscribe(data => {
+      this.http.get(this.apiUrl+'/photoset/list').subscribe(data => {
+        resolve(data);
+      });
+    });
+  }
+
+  getPhotoURLs(id: String) {
+    return new Promise(resolve => {
+      this.http.get(`${this.apiUrl}/photo/urls/${id}`)
+      .subscribe(data => {
         resolve(data);
       });
     });
