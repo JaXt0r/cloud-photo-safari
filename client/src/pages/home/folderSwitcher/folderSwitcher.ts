@@ -15,8 +15,6 @@ export class FolderSwitcher {
 
     this.rest.getPhotosets().then(d => {
       this.folders = d as any[];
-      console.log(d);
-      this.rest.getPhotoURLs(d[0].primaryPhoto.id).then(d => {console.log(d)})
     });
   }
 
