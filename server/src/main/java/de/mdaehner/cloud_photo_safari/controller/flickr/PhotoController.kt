@@ -1,7 +1,6 @@
 package de.mdaehner.cloud_photo_safari.controller.flickr
 
 import com.flickr4java.flickr.photos.PhotosInterface
-import com.flickr4java.flickr.photosets.PhotosetsInterface
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController

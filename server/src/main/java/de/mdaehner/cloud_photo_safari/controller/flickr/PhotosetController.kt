@@ -19,16 +19,25 @@ class PhotosetController : AbstractFlickrController() {
 
 
     @RequestMapping("list")
-    fun foo(): List<PhotosetData> {
-        var response = photosets.getList(nsid).photosets.jmap(Photoset::class.java, PhotosetData::class.java)
+    fun getList(): List<PhotosetData> {
+        var photosets = photosets.getList(nsid, "url_o").photosets
 
-        // Adding image URLs with additional flickr-request
-        response.forEach {
-            val photo = photosIntface.getPhoto(it.primaryPhoto.id)
-            it.primaryPhoto.urls = PhotoURLsData(photo.originalUrl, photo.thumbnailUrl,
-                    photo.largeUrl, photo.large2048Url, photo.large1600Url,
-                    photo.mediumUrl,
-                    photo.smallUrl, photo.smallSquareUrl, photo.small320Url)
+        var response = photosets.jmap(Photoset::class.java, PhotosetData::class.java)
+
+        // Manually map the URLs, because JMapper requires the values as properties, but only getter exists.
+        response.map {
+            val convertedId = it.id
+            val photo = photosets.firstOrNull { convertedId == it.id }?.primaryPhoto
+            it.primaryPhoto.urls = PhotoURLsData(
+                    photo?.originalUrl,
+                    photo?.thumbnailUrl,
+                    photo?.largeUrl,
+                    photo?.large2048Url,
+                    photo?.large1600Url,
+                    photo?.mediumUrl,
+                    photo?.smallUrl,
+                    photo?.smallSquareUrl,
+                    photo?.small320Url)
         }
 
         return response

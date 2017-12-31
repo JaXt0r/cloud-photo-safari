@@ -6,6 +6,7 @@ import com.googlecode.jmapper.annotations.JGlobalMap
 @JGlobalMap
 class PhotosetData {
 
+    lateinit var id: String
     lateinit var title: String
     lateinit var primaryPhoto: PhotoData
 

@@ -12,8 +12,7 @@ export class FolderSwitcher {
   folders = [];
 
   constructor(private rest: RestService) {
-
-    this.rest.getPhotosets().then(d => {
+    this.rest.getPhotosets().subscribe(d => {
       this.folders = d as any[];
     });
   }

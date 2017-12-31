@@ -1,7 +1,7 @@
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let folder of folders">
-      <img height="80" [src]="folder.primaryPhoto.urls.original" />
+  <ion-list [virtualScroll]="folders">
+    <ion-item *virtualItem="let folder">
+      <ion-img [src]="folder.primaryPhoto.urls.smallSquare"></ion-img>
       {{ folder.title }}
     </ion-item>
   </ion-list>
