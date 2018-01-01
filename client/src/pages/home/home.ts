@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
+
+import { RestService } from '../../services/restService';
 
 import { FolderSwitcher } from './folderSwitcher/folderSwitcher';
 import { SettingsPage } from '../settings/settings';
@@ -8,12 +10,21 @@ import { SettingsPage } from '../settings/settings';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
+
+  @ViewChild('background') background: any;
 
   constructor(
     public navCtrl: NavController,
-    public alertCtrl: ActionSheetController, private modalCtrl: ModalController
+    public alertCtrl: ActionSheetController, private modalCtrl: ModalController,
+    private rest: RestService
   ) {}
+
+  ngOnInit() {
+    this.rest.getPhotoURLs("38524596145").subscribe((photo) => {
+      this.background._elementRef.nativeElement.style.background = `url(${(photo as any).original}) no-repeat center top fixed`;
+    });
+  }
 
 
   displayMenu() {
