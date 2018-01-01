@@ -1,7 +1,10 @@
 page-home {
   ion-content {
-    background: url('/assets/imgs/tree-dummy.jpg') no-repeat center top fixed;
-    background-size: cover;
+    background-size: contain;
+    background-image: url('/assets/imgs/tree-dummy.jpg');
+    background-repeat:  no-repeat;
+    background-position:  center top;
+    background-attachment: fixed;
   }
 }
 

@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
+import { Events, NavController, ActionSheetController, ModalController } from 'ionic-angular';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 import { RestService } from '../../services/restService';
@@ -15,20 +15,26 @@ export class HomePage implements OnInit {
 
   @ViewChild('background') background: any;
 
+  private currentFolder: any;
+
+
   constructor(
     public navCtrl: NavController,
     public alertCtrl: ActionSheetController, private modalCtrl: ModalController,
-    private rest: RestService
+    private rest: RestService, private events: Events
   ) {}
 
   ngOnInit() {
     let timer = TimerObservable.create(2000, 5000);
      timer.subscribe(t => {
-       this.rest.getRandomPhoto("72157690844086705").subscribe((photo) => {
-         this.background._elementRef.nativeElement.style.background = `url(${(photo as any).urls.original}) no-repeat center top fixed`;
-       });
+       if (undefined !== this.currentFolder) {
+         this.rest.getRandomPhoto(this.currentFolder.id).subscribe((photo) => {
+           this.background._elementRef.nativeElement.style.backgroundImage = `url(${(photo as any).urls.original})`;
+         });
+       }
      });
 
+     this.events.subscribe('useFolder', (folder) => {this.currentFolder = folder});
   }
 
 
