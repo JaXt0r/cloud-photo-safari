@@ -13,8 +13,8 @@ export class RestService {
     return this.http.get(this.apiUrl+'/photoset/list');
   }
 
-  getPhotoURLs(id: String) {
-    return this.http.get(`${this.apiUrl}/photo/urls/${id}`)
+  getRandomPhoto(photosetId: String) {
+    return this.http.get(`${this.apiUrl}/photoset/randomPhoto/${photosetId}`)
   }
 
 }

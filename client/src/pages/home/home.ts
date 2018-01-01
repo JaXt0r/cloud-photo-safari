@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
+import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 import { RestService } from '../../services/restService';
 
@@ -21,9 +22,13 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.rest.getPhotoURLs("38524596145").subscribe((photo) => {
-      this.background._elementRef.nativeElement.style.background = `url(${(photo as any).original}) no-repeat center top fixed`;
-    });
+    let timer = TimerObservable.create(2000, 5000);
+     timer.subscribe(t => {
+       this.rest.getRandomPhoto("72157690844086705").subscribe((photo) => {
+         this.background._elementRef.nativeElement.style.background = `url(${(photo as any).urls.original}) no-repeat center top fixed`;
+       });
+     });
+
   }
 
 
