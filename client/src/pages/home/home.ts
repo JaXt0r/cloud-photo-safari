@@ -32,10 +32,10 @@ export class HomePage implements OnInit {
      timer.subscribe(t => {
        if (undefined !== this.currentFolder) {
          this.rest.getRandomPhoto(this.currentFolder.id).subscribe((photo) => {
-           var oldBg = this.currentBackground.nativeElement;
-           this.currentBackground = (this.currentBackground==this.background1) ? this.background2 : this.background1;
-           this.currentBackground.nativeElement.src = (photo as any).urls.original;
-           var newBg = this.currentBackground.nativeElement;
+           //var oldBg = this.currentBackground.nativeElement;
+           //this.currentBackground = (this.currentBackground==this.background1) ? this.background2 : this.background1;
+           //this.currentBackground.nativeElement.src = (photo as any).urls.original;
+           //var newBg = this.currentBackground.nativeElement;
          });
        }
      });

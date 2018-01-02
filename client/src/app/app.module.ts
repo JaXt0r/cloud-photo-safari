@@ -10,6 +10,9 @@ import { FolderSwitcher } from '../pages/home/folderSwitcher/folderSwitcher';
 
 import { SettingsPage, TabSettings, TabFolder } from '../pages/settings/settings';
 
+import { TestPage } from '../pages/test/test';
+
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -25,7 +28,8 @@ import { RestService } from '../services/restService';
     // SettingsPage
     SettingsPage,
     TabSettings,
-    TabFolder
+    TabFolder,
+    TestPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import { RestService } from '../services/restService';
     // SettingsPage
     SettingsPage,
     TabSettings,
-    TabFolder
+    TabFolder,
+    TestPage
   ],
   providers: [
     StatusBar,
