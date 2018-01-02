@@ -2,7 +2,7 @@
   <ion-list [virtualScroll]="folders">
     <button *virtualItem="let folder" ion-item (click)="switchFolder(folder)">
       <ion-img [src]="folder.primaryPhoto.urls.smallSquare"></ion-img>
-      {{ folder.title }}
+      {{ folder.title }} ({{ folder.photoCount }})
     </button>
   </ion-list>
 </ion-content>

@@ -8,28 +8,6 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 @Component({
   selector: 'page-test',
   templateUrl: 'test.html'
-/*  animations: [
-    trigger('heroState', [
-      state('false', style({
-        opacity: '0'
-      })),
-      state('true', style({
-        opacity: '1'
-      })),
-      transition('false => true', animate('1000ms')),
-      transition('true => false', animate('1000ms'))
-    ]),
-    trigger('heroState2', [
-      state('false', style({
-        opacity: '1'
-      })),
-      state('true', style({
-        opacity: '0'
-      })),
-      transition('true => false', animate('1000ms')),
-      transition('false => true', animate('1000ms'))
-    ])
-  ]*/
 })
 export class TestPage implements OnInit {
 

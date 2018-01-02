@@ -3,8 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-//import { HomePage } from '../pages/home/home';
-import { TestPage } from '../pages/test/test';
+import { HomePage } from '../pages/home/home';
+//import { TestPage } from '../pages/test/test';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,7 +12,8 @@ import { TestPage } from '../pages/test/test';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = TestPage;
+  rootPage: any = HomePage;
+//  rootPage: any = TestPage;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
