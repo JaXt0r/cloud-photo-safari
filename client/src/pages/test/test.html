@@ -1,4 +1,4 @@
 <ion-content>
-  <img photo-background #background1 src="/assets/imgs/tree-dummy.jpg" [@heroState]="heroState" (click)="toggleState()" />
-  <img photo-background #background2 src="/assets/imgs/tree-dummy-flip.jpg" />
+  <div photo-background #background1 style="background-image: url('/assets/imgs/tree-dummy.jpg');"      [@heroState]="heroState"   (click)="toggleState()"></div>
+  <div photo-background #background2 style="background-image: url('/assets/imgs/tree-dummy-flip.jpg');" [@heroState2]="heroState2" (click)="toggleState()"></div>
 </ion-content>

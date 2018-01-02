@@ -16,19 +16,31 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         transform: 'translateX(0)',
         opacity: '1'
       })),
-      transition('false => true', animate('1000ms ease-in')),
-      transition('true => false', animate('1000ms ease-out'))
+      transition('false => true', animate('1000ms')),
+      transition('true => false', animate('1000ms'))
+    ]),
+    trigger('heroState2', [
+      state('false', style({
+        transform: 'translateX(0)',
+        opacity: '1'
+      })),
+      state('true', style({
+        transform: 'translateX(100%)',
+        opacity: '0'
+      })),
+      transition('true => false', animate('1000ms')),
+      transition('false => true', animate('1000ms'))
     ])
   ]
 })
 export class TestPage implements OnInit {
 
   private heroState: boolean = true;
+  private heroState2: boolean = true;
 
   @ViewChild('background1') background1: any;
   @ViewChild('background2') background2: any;
   private currentBackground: any;
-  private currentFolder: any;
 
 
   constructor(
@@ -42,6 +54,6 @@ export class TestPage implements OnInit {
 
   toggleState() {
     this.heroState = !this.heroState;
-    console.log(this.heroState);
+    this.heroState2 = !this.heroState2;
   }
 }

@@ -2,10 +2,15 @@ page-test {
   ion-content {
     .scroll-content {
       overflow: hidden;
-    }
-    photo-background {
-      width:100%;
-      height:100%;
+
+      div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
     }
   }
 }
