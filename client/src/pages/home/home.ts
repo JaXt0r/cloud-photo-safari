@@ -13,8 +13,9 @@ import { SettingsPage } from '../settings/settings';
 })
 export class HomePage implements OnInit {
 
-  @ViewChild('background') background: any;
-
+  @ViewChild('background1') background1: any;
+  @ViewChild('background2') background2: any;
+  private currentBackground: any;
   private currentFolder: any;
 
 
@@ -25,11 +26,16 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.currentBackground = this.background1;
+
     let timer = TimerObservable.create(2000, 5000);
      timer.subscribe(t => {
        if (undefined !== this.currentFolder) {
          this.rest.getRandomPhoto(this.currentFolder.id).subscribe((photo) => {
-           this.background._elementRef.nativeElement.style.backgroundImage = `url(${(photo as any).urls.original})`;
+           var oldBg = this.currentBackground.nativeElement;
+           this.currentBackground = (this.currentBackground==this.background1) ? this.background2 : this.background1;
+           this.currentBackground.nativeElement.src = (photo as any).urls.original;
+           var newBg = this.currentBackground.nativeElement;
          });
        }
      });
