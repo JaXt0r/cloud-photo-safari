@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Events, NavController, ActionSheetController, ModalController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
@@ -9,6 +10,7 @@ import { RestService } from '../../services/restService';
 
 import { FolderSwitcher } from './folderSwitcher/folderSwitcher';
 import { SettingsPage } from '../settings/settings';
+
 
 @Component({
   selector: 'page-home',
@@ -26,16 +28,24 @@ export class HomePage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: ActionSheetController, private modalCtrl: ModalController,
     private rest: RestService, private events: Events,
-    private animationBuilder: AnimationBuilder
+    private animationBuilder: AnimationBuilder,
+    private storage: Storage
   ) {}
 
   ngOnInit() {
+    this.storage.get('folder').then((val) => {
+      this.currentFolder = val;
+    });
+    
     this.currentBackground = this.background1;
 
     let timer = TimerObservable.create(5000, 5000);
      timer.subscribe((t) => this.timerCallback(t));
 
-     this.events.subscribe('useFolder', (folder) => {this.currentFolder = folder; console.log('setFolder');});
+     this.events.subscribe('useFolder', (folder) => {
+       this.currentFolder = folder;
+       this.storage.set('folder', folder);
+      });
   }
 
 

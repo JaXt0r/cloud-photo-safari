@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -28,6 +29,7 @@ import { RestService } from '../services/restService';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     HttpClientModule,
     BrowserAnimationsModule
   ],
