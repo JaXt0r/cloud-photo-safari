@@ -3,7 +3,7 @@ import { Events, NavController, ActionSheetController, ModalController } from 'i
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
-import { style, animate, transition } from '@angular/animations';
+import { style, animate } from '@angular/animations';
 
 import { RestService } from '../../services/restService';
 
@@ -50,7 +50,6 @@ export class HomePage implements OnInit {
   randomPhotoCallback(photo: any) {
     console.log('newImage', `url('${photo.urls.original}')`, photo.urls.original);
 
-    var oldBg = this.currentBackground.nativeElement;
     this.currentBackground = (this.currentBackground==this.background1) ? this.background2 : this.background1;
 
     var bgImg = new Image();
@@ -64,8 +63,6 @@ export class HomePage implements OnInit {
     }
 
     bgImg.src = photo.urls.medium;
-
-    var newBg = this.currentBackground.nativeElement;
   }
 
 

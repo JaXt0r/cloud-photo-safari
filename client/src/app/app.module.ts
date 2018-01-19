@@ -10,9 +10,6 @@ import { FolderSwitcher } from '../pages/home/folderSwitcher/folderSwitcher';
 
 import { SettingsPage, TabSettings, TabFolder } from '../pages/settings/settings';
 
-import { TestPage } from '../pages/test/test';
-
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -22,14 +19,11 @@ import { RestService } from '../services/restService';
 @NgModule({
   declarations: [
     MyApp,
-    // HomePage
     HomePage,
     FolderSwitcher,
-    // SettingsPage
     SettingsPage,
     TabSettings,
-    TabFolder,
-    TestPage
+    TabFolder
   ],
   imports: [
     BrowserModule,
@@ -40,14 +34,11 @@ import { RestService } from '../services/restService';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    // HomePage
     HomePage,
     FolderSwitcher,
-    // SettingsPage
     SettingsPage,
     TabSettings,
-    TabFolder,
-    TestPage
+    TabFolder
   ],
   providers: [
     StatusBar,
