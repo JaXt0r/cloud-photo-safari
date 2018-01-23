@@ -1,5 +1,7 @@
 # Files
 *.iml
+*.vdi
+secrets.txt
 
 # Folder
 .idea/

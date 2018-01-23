@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
     
     this.currentBackground = this.background1;
 
-    let timer = TimerObservable.create(5000, 5000);
+    let timer = TimerObservable.create(5000, 10000);
      timer.subscribe((t) => this.timerCallback(t));
 
      this.events.subscribe('useFolder', (folder) => {
@@ -51,7 +51,7 @@ export class HomePage implements OnInit {
 
   timerCallback(t: number) {
     console.log('currentFolder', this.currentFolder);
-    if (undefined !== this.currentFolder && !this.paused) {
+    if (null !== this.currentFolder && undefined !== this.currentFolder && !this.paused) {
       this.paused = true;
       this.rest.getRandomPhoto(this.currentFolder.id).subscribe((photo) => this.randomPhotoCallback(photo));
     }
