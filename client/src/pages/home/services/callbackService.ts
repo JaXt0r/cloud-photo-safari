@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 import { RestService } from '../../../services/restService';
 import { AnimationService } from './animationService';
 
-import { HomeModel } from '../models/homeModel';
+import { HomeModel } from '../../../models/homeModel';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 
@@ -26,8 +26,11 @@ export class CallbackService implements OnInit {
 
 
   public start() {
+    // Initial call
+    this.timerCallback();
+
     let timer = TimerObservable.create(5000, 10000);
-    timer.subscribe((t) => this.timerCallback(t));
+    timer.subscribe(() => this.timerCallback());
 
     this.events.subscribe('useFolder', (folder) => {
       this.model.currentFolder = folder;
@@ -36,7 +39,7 @@ export class CallbackService implements OnInit {
   }
 
 
-  private timerCallback(t: number) {
+  private timerCallback() {
     console.log('currentFolder', this.model.currentFolder);
     if (null !== this.model.currentFolder && undefined !== this.model.currentFolder && !this.model.paused) {
       this.model.paused = true;

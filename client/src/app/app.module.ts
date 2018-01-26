@@ -18,7 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestService } from '../services/restService';
 import { AnimationService } from '../pages/home/services/animationService';
 import { CallbackService } from '../pages/home/services/callbackService';
-import { HomeModel } from '../pages/home/models/homeModel';
+import { HomeModel } from '../models/homeModel';
+import { SettingsModel } from '../models/settingsModel';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { HomeModel } from '../pages/home/models/homeModel';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestService,
-    AnimationService, CallbackService, HomeModel
+    AnimationService, CallbackService,
+    HomeModel, SettingsModel
   ]
 })
 export class AppModule {}

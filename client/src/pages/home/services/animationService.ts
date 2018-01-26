@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
 import { style, animate } from '@angular/animations';
 
-import { HomeModel } from '../models/homeModel';
+import { HomeModel } from '../../../models/homeModel';
 
 
 @Injectable()

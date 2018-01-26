@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
 
-import { HomeModel } from './models/homeModel';
+import { HomeModel } from '../../models/homeModel';
 import { CallbackService } from './services/callbackService';
 
 import { FolderSwitcher } from './folderSwitcher/folderSwitcher';
