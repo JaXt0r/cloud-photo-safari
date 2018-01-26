@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
 
-import { AnimationService } from '../../services/animationService';
-import { CallbackService } from '../../services/callbackService';
+import { HomeModel } from './models/homeModel';
+import { CallbackService } from './services/callbackService';
 
 import { FolderSwitcher } from './folderSwitcher/folderSwitcher';
 import { SettingsPage } from '../settings/settings';
@@ -16,22 +16,19 @@ export class HomePage implements OnInit {
 
   @ViewChild('background1') background1: any;
   @ViewChild('background2') background2: any;
-  private currentBackground: any;
-  private currentFolder: any;
 
 
   constructor(
     public navCtrl: NavController,
     public alertCtrl: ActionSheetController, private modalCtrl: ModalController,
-    private animationService: AnimationService,
-    private callbackService: CallbackService
+    private callbackService: CallbackService,
+    private homeModel: HomeModel
   ) {}
 
   ngOnInit() {
-    this.currentBackground = this.background1;
+    this.homeModel.init(this.background1, this.background1, this.background2);
 
-    this.animationService.init(this.currentBackground, this.currentFolder, this.background1, this.background2);
-    this.callbackService.init(this.currentBackground, this.currentFolder, this.background1, this.background2);
+    this.callbackService.start();
   }
 
 

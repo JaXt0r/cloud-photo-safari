@@ -16,8 +16,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 // Services
 import { RestService } from '../services/restService';
-import { AnimationService } from '../services/animationService';
-import { CallbackService } from '../services/callbackService';
+import { AnimationService } from '../pages/home/services/animationService';
+import { CallbackService } from '../pages/home/services/callbackService';
+import { HomeModel } from '../pages/home/models/homeModel';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { CallbackService } from '../services/callbackService';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestService, AnimationService, CallbackService
+    RestService,
+    AnimationService, CallbackService, HomeModel
   ]
 })
 export class AppModule {}

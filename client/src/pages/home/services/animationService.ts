@@ -4,14 +4,11 @@ import { Injectable } from '@angular/core';
 import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
 import { style, animate } from '@angular/animations';
 
+import { HomeModel } from '../models/homeModel';
+
 
 @Injectable()
 export class AnimationService {
-
-    private currentBackground: any;
-    private currentFolder: any;
-    private background1: any;
-    private background2: any;
 
     private photoState: number = 0;
 
@@ -21,15 +18,7 @@ export class AnimationService {
     private anim22: AnimationPlayer;
   
     
-    constructor(private animationBuilder: AnimationBuilder) {}
-
-
-    public init(currentBackground: any, currentFolder: any, background1: any, background2: any) {
-      this.currentBackground = currentBackground;
-      this.currentFolder = currentFolder;
-      this.background1 = background1;
-      this.background2 = background2;
-    }
+    constructor(private animationBuilder: AnimationBuilder, private model: HomeModel) {}
     
 
     public togglePhoto() {
@@ -54,8 +43,8 @@ export class AnimationService {
       const duration = 1000;
   
       var builder = this.animationBuilder;
-      var bg1 = this.background1.nativeElement;
-      var bg2 = this.background2.nativeElement;
+      var bg1 = this.model.background1.nativeElement;
+      var bg2 = this.model.background2.nativeElement;
   
       this.anim11 = builder.build([
         animate(duration, style({opacity: 0}))
