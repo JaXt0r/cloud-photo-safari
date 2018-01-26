@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
@@ -7,35 +7,44 @@ import { RestService } from '../../../services/restService';
 import { AnimationService } from './animationService';
 
 import { HomeModel } from '../../../models/homeModel';
+import { SettingsModel } from '../../../models/settingsModel';
+
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 
 @Injectable()
-export class CallbackService implements OnInit {
+export class CallbackService {
 
-  public constructor(private rest: RestService, private animationService: AnimationService, private model: HomeModel,
-    private storage: Storage, private events: Events) {
-
-  }
-
-  ngOnInit() {
-    this.storage.get('folder').then((val) => {
-      this.model.currentFolder = val;
-    });
-  }
-
-
-  public start() {
-    // Initial call
-    this.timerCallback();
-
-    let timer = TimerObservable.create(5000, 10000);
-    timer.subscribe(() => this.timerCallback());
-
-    this.events.subscribe('useFolder', (folder) => {
+  public constructor(private rest: RestService, private animationService: AnimationService,
+    private model: HomeModel, private settingsModel: SettingsModel,
+    private storage: Storage, private events: Events
+  ) {
+    this.events.subscribe('home.changeImageFolder', (folder) => {
       this.model.currentFolder = folder;
-      this.storage.set('folder', folder);
+      this.storage.set('home.imageFolder', folder);
     });
+
+    this.events.subscribe('settingsPage.changefrequency', () => { this.start() });
+
+    this.storage.get('home.imageFolder').then((val) => {
+      this.model.currentFolder = val;
+      this.start();
+    });
+  }
+
+
+  /**
+   * Yes, this method does nothing, but! it is needed for injection (without no-use warning) and instanciation inside parent class.
+   * 
+   */
+  public init() {
+    // NO OP
+  }
+
+
+  private start() {
+    let timer = TimerObservable.create(0, this.settingsModel.imageFrequency);
+    timer.subscribe(() => this.timerCallback());
   }
 
 

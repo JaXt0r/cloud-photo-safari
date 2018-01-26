@@ -27,8 +27,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.homeModel.init(this.background1, this.background1, this.background2);
-
-    this.callbackService.start();
+    this.callbackService.init();
   }
 
 

@@ -19,7 +19,7 @@ export class FolderSwitcher {
   }
 
   switchFolder(folder: any) {
-    this.events.publish('useFolder', folder);
+    this.events.publish('home.changeImageFolder', folder);
     this.navCtrl.pop();
   }
 
