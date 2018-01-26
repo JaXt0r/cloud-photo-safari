@@ -10,8 +10,8 @@ export class AnimationService {
 
     private currentBackground: any;
     private currentFolder: any;
-    background1: any;
-    background2: any;
+    private background1: any;
+    private background2: any;
 
     private photoState: number = 0;
 
