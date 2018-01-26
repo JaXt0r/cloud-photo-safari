@@ -7,3 +7,4 @@ secrets.txt
 .idea/
 .flickrAuth/
 target/
+server/debug-run.sh

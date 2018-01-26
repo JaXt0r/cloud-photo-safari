@@ -3,11 +3,8 @@ import { Events, NavController, ActionSheetController, ModalController } from 'i
 import { Storage } from '@ionic/storage';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 
-import { AnimationBuilder, AnimationPlayer } from '@angular/animations';
-import { style, animate } from '@angular/animations';
-
 import { RestService } from '../../services/restService';
-
+import { AnimationService } from '../../services/animationService';
 import { FolderSwitcher } from './folderSwitcher/folderSwitcher';
 import { SettingsPage } from '../settings/settings';
 
@@ -28,11 +25,13 @@ export class HomePage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: ActionSheetController, private modalCtrl: ModalController,
     private rest: RestService, private events: Events,
-    private animationBuilder: AnimationBuilder,
+    private animationService: AnimationService,
     private storage: Storage
   ) {}
 
   ngOnInit() {
+    this.animationService.init(this.currentBackground, this.currentFolder, this.background1, this.background2);
+
     this.storage.get('folder').then((val) => {
       this.currentFolder = val;
     });
@@ -120,68 +119,8 @@ export class HomePage implements OnInit {
   }
 
 
-  private photoState: number = 0;
-
-  private anim11: AnimationPlayer;
-  private anim12: AnimationPlayer;
-  private anim21: AnimationPlayer;
-  private anim22: AnimationPlayer;
-
-
-  createAnimations() {
-    const duration = 1000;
-
-    var builder = this.animationBuilder;
-    var bg1 = this.background1.nativeElement;
-    var bg2 = this.background2.nativeElement;
-
-    this.anim11 = builder.build([
-      animate(duration, style({opacity: 0}))
-    ]).create(bg1);
-    this.anim12 = builder.build([
-      animate(duration, style({opacity: 1}))
-    ]).create(bg1);
-
-    this.anim21 = builder.build([
-      animate(duration, style({opacity: 1}))
-    ]).create(bg2);
-    this.anim22 = builder.build([
-      animate(duration, style({opacity: 0}))
-    ]).create(bg2);
-
-    this.anim11.onDone(() => {
-      bg1.style.opacity = 0;
-      this.anim11.destroy();
-    });
-    this.anim12.onDone(() => {
-      bg1.style.opacity = 1;
-      this.anim12.destroy();
-    });
-    this.anim21.onDone(() => {
-      bg2.style.opacity = 1;
-      this.anim21.destroy();
-    });
-    this.anim22.onDone(() => {
-      bg2.style.opacity = 0;
-      this.anim22.destroy();
-    });
-  }
-
-
   togglePhoto() {
-    this.createAnimations();
-
-    switch (this.photoState) {
-      case 0:
-      this.anim11.play();
-      this.anim21.play();
-      ++this.photoState;
-      return;
-      case 1:
-      this.anim12.play();
-      this.anim22.play();
-      this.photoState = 0;
-      return;
-    }
+    this.animationService.togglePhoto();
   }
+
 }

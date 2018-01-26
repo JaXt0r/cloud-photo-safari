@@ -14,7 +14,9 @@ import { SettingsPage, TabSettings, TabFolder } from '../pages/settings/settings
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// Services
 import { RestService } from '../services/restService';
+import { AnimationService } from '../services/animationService';
 
 
 @NgModule({
@@ -46,7 +48,7 @@ import { RestService } from '../services/restService';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestService
+    RestService, AnimationService
   ]
 })
 export class AppModule {}
