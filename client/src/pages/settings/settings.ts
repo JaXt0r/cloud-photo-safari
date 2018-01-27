@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, Events } from 'ionic-angular';
+
+import { SettingsModel } from '../../models/settingsModel';
+
+
 
 @Component({
   selector: 'page-settings',
@@ -11,20 +15,39 @@ export class SettingsPage {
   folderRoot:   any = TabFolder;
 
 
-  constructor(public navCtrl: NavController) {
+  constructor() { }
 
-  }
-
+  
 }
+
+
 
 @Component({
   templateUrl: 'tabSettings.html'
 })
-export class TabSettings {
+export class TabSettings implements OnInit {
 
-  constructor(public navCtrl: NavController) {}
+  private imageFrequency: any; 
+
+
+  constructor(private settingsModel: SettingsModel, private events: Events) { }
+
+
+  ngOnInit() {
+    this.imageFrequency = this.settingsModel.getImageFrequency();
+  }
+
+
+  public imageFrequencyChanged() {
+    this.settingsModel.setImageFrequency(this.imageFrequency);
+
+    this.events.publish('settingsPage.imageFrequencyChanged');
+  }
+
 
 }
+
+
 
 @Component({
   templateUrl: 'tabFolder.html'

@@ -9,11 +9,15 @@ import { AnimationService } from './animationService';
 import { HomeModel } from '../../../models/homeModel';
 import { SettingsModel } from '../../../models/settingsModel';
 
-import {TimerObservable} from "rxjs/observable/TimerObservable";
+import { TimerObservable } from "rxjs/observable/TimerObservable";
+import { Subscription } from "rxjs/Subscription";
 
 
 @Injectable()
 export class CallbackService {
+
+  private imageTimerSubscription: Subscription;
+
 
   public constructor(private rest: RestService, private animationService: AnimationService,
     private model: HomeModel, private settingsModel: SettingsModel,
@@ -24,7 +28,7 @@ export class CallbackService {
       this.storage.set('home.imageFolder', folder);
     });
 
-    this.events.subscribe('settingsPage.changefrequency', () => { this.start() });
+    this.events.subscribe('settingsPage.imageFrequencyChanged', () => { this.restart() });
 
     this.storage.get('home.imageFolder').then((val) => {
       this.model.currentFolder = val;
@@ -41,10 +45,16 @@ export class CallbackService {
     // NO OP
   }
 
+  private restart() {
+    this.imageTimerSubscription.unsubscribe();
+
+    this.start();
+  }
 
   private start() {
+    console.log('new timer starting with', this.settingsModel.imageFrequency);
     let timer = TimerObservable.create(0, this.settingsModel.imageFrequency);
-    timer.subscribe(() => this.timerCallback());
+    this.imageTimerSubscription = timer.subscribe(() => this.timerCallback());
   }
 
 

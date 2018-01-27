@@ -1,45 +1,24 @@
 <ion-content>
 
   <ion-list>
-    <ion-list-header>
-      Helligkeit
-    </ion-list-header>
 
     <ion-item>
-      <ion-range min="20" max="80" step="2">
-        <ion-icon small range-left name="sunny"></ion-icon>
-        <ion-icon range-right name="sunny"></ion-icon>
-      </ion-range>
+      <ion-label>Bildfrequenz</ion-label>
+
+      <ion-select [(ngModel)]="imageFrequency" (ngModelChange)="imageFrequencyChanged()">
+        <ion-option value="10000">10sec</ion-option>
+        <ion-option value="30000">30sec</ion-option>
+        <ion-option value="60000">60sec</ion-option>
+        <ion-option value="120000">2min</ion-option>
+        <ion-option value="300000">5min</ion-option>
+        <ion-option value="600000">10min</ion-option>
+        <ion-option value="1800000">30min</ion-option>
+        <ion-option value="3600000">1h</ion-option>
+        <ion-option value="7200000">2h</ion-option>
+        <ion-option value="21600000">6h</ion-option>
+      </ion-select>
     </ion-item>
-  </ion-list>
 
-  <ion-list padding>
-    <ion-list-header>
-      Bildfrequenz
-    </ion-list-header>
-
-    <ion-range min="5" max="30" step="5" snaps="true">
-      <ion-icon range-left small name="speedometer"></ion-icon>
-      <ion-icon range-right name="speedometer"></ion-icon>
-    </ion-range>
-  </ion-list>
-
-  <ion-list padding>
-    <ion-list-header>
-      <ion-icon name="timer" item-start></ion-icon>
-      An/Aus Zeiten
-    </ion-list-header>
-
-    <ion-item>
-      <ion-range dualKnobs="true" pin="true">
-        <ion-label range-left>-0</ion-label>
-        <ion-label range-right>100</ion-label>
-      </ion-range>
-      <ion-range dualKnobs="true" pin="true">
-        <ion-label range-left>-0</ion-label>
-        <ion-label range-right>100</ion-label>
-      </ion-range>
-    </ion-item>
   </ion-list>
 
 </ion-content>
