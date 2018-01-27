@@ -52,8 +52,8 @@ export class CallbackService {
   }
 
   private start() {
-    console.log('new timer starting with', this.settingsModel.imageFrequency);
-    let timer = TimerObservable.create(0, this.settingsModel.imageFrequency);
+    console.log('new timer starting with', this.settingsModel.getImageFrequency());
+    let timer = TimerObservable.create(0, this.settingsModel.getImageFrequency());
     this.imageTimerSubscription = timer.subscribe(() => this.timerCallback());
   }
 
