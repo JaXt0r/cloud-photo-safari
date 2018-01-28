@@ -74,7 +74,7 @@ export class CallbackService {
 
     var bgImg = new Image();
     bgImg.onload = () => {
-        this.model.currentBackground.nativeElement.style.backgroundImage = `url('${photo.urls.medium}')`;
+        this.model.currentBackground.nativeElement.style.backgroundImage = `url('${photo.urls.original}')`;
         this.togglePhoto();
         this.model.paused = false;
     };
