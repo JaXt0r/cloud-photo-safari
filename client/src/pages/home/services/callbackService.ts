@@ -67,6 +67,10 @@ export class CallbackService {
   }
   
 
+  /**
+   * Preload photo so that it can be loaded smoothely afterwards.
+   * @param photo 
+   */
   private randomPhotoCallback(photo: any) {
     console.log('newImage', `url('${photo.urls.original}')`, photo.urls.original);
 
