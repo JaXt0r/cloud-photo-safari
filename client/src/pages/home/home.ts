@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
 
   displayMenu() {
     this.alertCtrl.create({
-      title: 'Landschaften',
+      title: '',
       cssClass: 'home-action-sheet-container',
       buttons: [
         {
@@ -48,7 +48,8 @@ export class HomePage implements OnInit {
             let folderModal = this.modalCtrl.create(FolderSwitcher);
             folderModal.present();
           }
-        },
+        }
+        /*,
         {
           icon: 'shuffle'
         },
@@ -69,7 +70,7 @@ export class HomePage implements OnInit {
         },
         {
           icon: 'trash'
-        }
+        }*/
       ]
     }).present();
   }
