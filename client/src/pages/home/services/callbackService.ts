@@ -26,27 +26,29 @@ export class CallbackService {
     this.events.subscribe('home.changeImageFolder', (folder) => {
       this.model.currentFolder = folder;
       this.storage.set('home.imageFolder', folder);
+
+      this.restart();
     });
 
     this.events.subscribe('settingsPage.imageFrequencyChanged', () => { this.restart() });
+  }
 
+
+  public init() {
     this.storage.get('home.imageFolder').then((val) => {
       this.model.currentFolder = val;
-      this.start();
+
+      if (val !== null && val !== undefined) {
+        this.start();
+      }
     });
   }
 
 
-  /**
-   * Yes, this method does nothing, but! it is needed for injection (without no-use warning) and instanciation inside parent class.
-   * 
-   */
-  public init() {
-    // NO OP
-  }
-
   private restart() {
-    this.imageTimerSubscription.unsubscribe();
+    if (this.imageTimerSubscription instanceof Subscription) {
+      this.imageTimerSubscription.unsubscribe();
+    }
 
     this.start();
   }

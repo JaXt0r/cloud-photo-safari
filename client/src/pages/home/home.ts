@@ -40,8 +40,6 @@ export class HomePage implements OnInit {
 
   private waitForBackend() {
     this.restService.getHealth().subscribe((response: any) => {
-      console.log(response)
-
       if (response && response.status === 'UP') {
         this.homeModel.init(this.background1, this.background1, this.background2);
         this.callbackService.init();
