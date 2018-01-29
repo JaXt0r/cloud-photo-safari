@@ -1,0 +1,4 @@
+endpoints:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET
