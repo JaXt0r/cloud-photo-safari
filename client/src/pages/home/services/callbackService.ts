@@ -74,13 +74,15 @@ export class CallbackService {
    * @param photo 
    */
   private randomPhotoCallback(photo: any) {
-    console.log('newImage', `url('${photo.urls.original}')`, photo.urls.original);
+    let imageURL = photo.sizes.large_1600.url;
+
+    console.log('newImage', imageURL);
 
     this.model.currentBackground = (this.model.currentBackground==this.model.background1) ? this.model.background2 : this.model.background1;
 
     var bgImg = new Image();
     bgImg.onload = () => {
-        this.model.currentBackground.nativeElement.style.backgroundImage = `url('${photo.urls.original}')`;
+        this.model.currentBackground.nativeElement.style.backgroundImage = `url('${imageURL}')`;
         this.togglePhoto();
         this.model.paused = false;
     };
@@ -88,7 +90,7 @@ export class CallbackService {
       this.model.paused = false;
     }
 
-    bgImg.src = photo.urls.medium;
+    bgImg.src = imageURL;
   }
 
     
