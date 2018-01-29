@@ -1,11 +1,13 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
+import { NavController, ActionSheetController, ModalController, LoadingController } from 'ionic-angular';
 
 import { HomeModel } from '../../models/homeModel';
 import { CallbackService } from './services/callbackService';
 
 import { FolderSwitcher } from './folderSwitcher/folderSwitcher';
 import { SettingsPage } from '../settings/settings';
+
+import { RestService } from '../../services/restService';
 
 
 @Component({
@@ -20,14 +22,43 @@ export class HomePage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    public alertCtrl: ActionSheetController, private modalCtrl: ModalController,
-    private callbackService: CallbackService,
+    public alertCtrl: ActionSheetController, private modalCtrl: ModalController, private loadingCtrl: LoadingController,
+    private callbackService: CallbackService, private restService: RestService,
     private homeModel: HomeModel
   ) {}
 
+
+  loading = this.loadingCtrl.create({
+    spinner: 'crescent',
+    content: 'Starte Fotosafari...',
+  });
+
+
   ngOnInit() {
-    this.homeModel.init(this.background1, this.background1, this.background2);
-    this.callbackService.init();
+    this.waitForBackend();
+  }
+
+  private waitForBackend() {
+    this.restService.getHealth().subscribe((response: any) => {
+      console.log(response)
+
+      if (response && response.status === 'UP') {
+        this.homeModel.init(this.background1, this.background1, this.background2);
+        this.callbackService.init();
+
+        this.loading.dismiss();
+      } else {
+        this.loading.present();
+
+        // Wait another 3 seconds.
+        setTimeout(() => {this.waitForBackend()}, 3000);
+      }  
+    },
+    // Wait another 3 seconds.
+    error => setTimeout(() => {
+      this.loading.present();
+      this.waitForBackend()}, 3000)
+    );
   }
 
 

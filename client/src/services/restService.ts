@@ -8,6 +8,9 @@ export class RestService {
 
   constructor(private http: HttpClient) { }
 
+  getHealth() {
+    return this.http.get(this.apiUrl+'/health');
+  }
 
   getPhotosets() {
     return this.http.get(this.apiUrl+'/photoset/list');
