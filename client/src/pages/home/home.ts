@@ -62,7 +62,7 @@ export class HomePage implements OnInit {
 
   displayMenu() {
     this.alertCtrl.create({
-      title: '',
+      title: this.homeModel.currentFolder ? this.homeModel.currentFolder.title : "[keine Auswahl]",
       cssClass: 'home-action-sheet-container',
       buttons: [
         {
