@@ -3,7 +3,10 @@
   <ion-list>
 
     <ion-item>
-      <ion-label>Bildfrequenz</ion-label>
+      <ion-label>
+        <ion-icon name="speedometer" padding-right></ion-icon>
+        Bildfrequenz
+      </ion-label>
 
       <ion-select [(ngModel)]="imageFrequency" (ngModelChange)="imageFrequencyChanged()">
         <ion-option value="10000">10sec</ion-option>
@@ -19,6 +22,39 @@
       </ion-select>
     </ion-item>
 
-  </ion-list>
+</ion-list>
+<ion-list>
+  <ion-list-header no-margin>
+    <ion-label no-margin>
+      <ion-icon name="moon" padding-right></ion-icon>
+      Pause
+    </ion-label>
+  </ion-list-header>
+  
+  <ion-grid margin-left>
+    <ion-row>
+      <ion-col>
+        <ion-label>Wochentags (Mo...Fr)</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-datetime displayFormat="HH:mm" placeholder="Von"></ion-datetime>
+      </ion-col>
+      <ion-col>
+        <ion-datetime displayFormat="HH:mm" placeholder="Bis"></ion-datetime>    
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Wochenende (Sa...So)</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-datetime displayFormat="HH:mm" placeholder="Von"></ion-datetime>
+      </ion-col>
+      <ion-col>
+        <ion-datetime displayFormat="HH:mm" placeholder="Bis"></ion-datetime>    
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-list>
 
 </ion-content>
