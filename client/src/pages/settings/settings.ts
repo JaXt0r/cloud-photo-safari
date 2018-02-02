@@ -28,6 +28,8 @@ export class SettingsPage {
 export class TabSettings implements OnInit {
 
   private imageFrequency: any; 
+  hibernates = [[0, 1], [1, 2]]
+  days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
 
 
   constructor(private settingsModel: SettingsModel, private events: Events) { }
@@ -42,6 +44,11 @@ export class TabSettings implements OnInit {
     this.settingsModel.setImageFrequency(this.imageFrequency);
 
     this.events.publish('settingsPage.imageFrequencyChanged');
+  }
+
+  onAddHibernate() {
+    console.log(123123);
+    this.hibernates.push([]);
   }
 
 
