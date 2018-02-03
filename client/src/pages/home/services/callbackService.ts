@@ -16,6 +16,8 @@ import { Subscription } from "rxjs/Subscription";
 @Injectable()
 export class CallbackService {
 
+  private HIBERNATE_IMAGE = {sizes: {large_1600: {url: '/assets/imgs/logo.png'}}};
+
   private imageTimerSubscription: Subscription;
   private hibernateTimerSubscription: Subscription;
 
@@ -53,7 +55,12 @@ export class CallbackService {
    * (re)start image timer.
    */
   private start() {
-    this.stop();
+    this.homeModel.hibernated = true;
+
+    // No double start!
+    if (this.imageTimerSubscription instanceof Subscription) {
+      this.imageTimerSubscription.unsubscribe();
+    }
 
     let timer = TimerObservable.create(0, this.settingsModel.getImageFrequency());
     this.imageTimerSubscription = timer.subscribe(() => this.timerCallback());
@@ -64,9 +71,11 @@ export class CallbackService {
    * Stop image timer for the moment.
    */
   private stop() {
+    this.homeModel.hibernated = false;
+
     if (this.imageTimerSubscription instanceof Subscription) {
       this.imageTimerSubscription.unsubscribe();
-    }    
+    }
   }
 
 
@@ -101,8 +110,13 @@ export class CallbackService {
       return false;
     });
 
-    if (isHibernate) {
+    if (isHibernate && this.homeModel.hibernated) {
+      console.log('start hibernate');
       this.stop();
+      this.randomPhotoCallback(this.HIBERNATE_IMAGE);
+    } else if (!isHibernate && !this.homeModel.hibernated) {
+      console.log('end hibernate');
+      this.start();
     }
   }
 
@@ -122,7 +136,6 @@ export class CallbackService {
    */
   private randomPhotoCallback(photo: any) {
     let imageURL = photo.sizes.large_1600.url;
-
     this.homeModel.currentBackground = (this.homeModel.currentBackground==this.homeModel.background1) ? this.homeModel.background2 : this.homeModel.background1;
 
     var bgImg = new Image();

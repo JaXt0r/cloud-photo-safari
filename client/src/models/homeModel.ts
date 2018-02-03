@@ -9,6 +9,7 @@ export class HomeModel {
   public background1: any;
   public background2: any;
   public paused: boolean = false;
+  public hibernated: boolean = false;
 
       
   public init(currentBackground: any, background1: any, background2: any) {
