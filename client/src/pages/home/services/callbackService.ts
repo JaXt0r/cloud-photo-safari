@@ -27,10 +27,10 @@ export class CallbackService {
       this.model.currentFolder = folder;
       this.storage.set('home.imageFolder', folder);
 
-      this.restart();
+      this.start();
     });
 
-    this.events.subscribe('settingsPage.imageFrequencyChanged', () => { this.restart() });
+    this.events.subscribe('settingsPage.imageFrequencyChanged', () => { this.start() });
   }
 
 
@@ -45,15 +45,11 @@ export class CallbackService {
   }
 
 
-  private restart() {
+  private start() {
     if (this.imageTimerSubscription instanceof Subscription) {
       this.imageTimerSubscription.unsubscribe();
     }
 
-    this.start();
-  }
-
-  private start() {
     console.log('new timer starting with', this.settingsModel.getImageFrequency());
     let timer = TimerObservable.create(0, this.settingsModel.getImageFrequency());
     this.imageTimerSubscription = timer.subscribe(() => this.timerCallback());
