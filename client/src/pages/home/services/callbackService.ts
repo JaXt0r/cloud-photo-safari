@@ -51,7 +51,6 @@ export class CallbackService {
   private start() {
     this.stop();
 
-    console.log('new timer starting with', this.settingsModel.getImageFrequency());
     let timer = TimerObservable.create(0, this.settingsModel.getImageFrequency());
     this.imageTimerSubscription = timer.subscribe(() => this.timerCallback());
   }
@@ -67,7 +66,6 @@ export class CallbackService {
   }
 
   private timerCallback() {
-    console.log('currentFolder', this.model.currentFolder);
     if (null !== this.model.currentFolder && undefined !== this.model.currentFolder && !this.model.paused) {
       this.model.paused = true;
       this.rest.getRandomPhoto(this.model.currentFolder.id).subscribe((photo) => this.randomPhotoCallback(photo));
