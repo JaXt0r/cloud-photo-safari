@@ -21,11 +21,11 @@ export class CallbackService {
 
 
   public constructor(private rest: RestService, private animationService: AnimationService,
-    private model: HomeModel, private settingsModel: SettingsModel,
+    private homeModel: HomeModel, private settingsModel: SettingsModel,
     private storage: Storage, private events: Events
   ) {
     this.events.subscribe('home.changeImageFolder', (folder) => {
-      this.model.currentFolder = folder;
+      this.homeModel.currentFolder = folder;
       this.storage.set('home.imageFolder', folder);
 
       this.start();
@@ -40,7 +40,7 @@ export class CallbackService {
 
   public init() {
     this.storage.get('home.imageFolder').then((val) => {
-      this.model.currentFolder = val;
+      this.homeModel.currentFolder = val;
 
       if (val !== null && val !== undefined) {
         this.start();
@@ -109,9 +109,9 @@ export class CallbackService {
 
 
   private timerCallback() {
-    if (null !== this.model.currentFolder && undefined !== this.model.currentFolder && !this.model.paused) {
-      this.model.paused = true;
-      this.rest.getRandomPhoto(this.model.currentFolder.id).subscribe((photo) => this.randomPhotoCallback(photo));
+    if (null !== this.homeModel.currentFolder && undefined !== this.homeModel.currentFolder && !this.homeModel.paused) {
+      this.homeModel.paused = true;
+      this.rest.getRandomPhoto(this.homeModel.currentFolder.id).subscribe((photo) => this.randomPhotoCallback(photo));
     }
   }
   
@@ -123,18 +123,16 @@ export class CallbackService {
   private randomPhotoCallback(photo: any) {
     let imageURL = photo.sizes.large_1600.url;
 
-    console.log('newImage', imageURL);
-
-    this.model.currentBackground = (this.model.currentBackground==this.model.background1) ? this.model.background2 : this.model.background1;
+    this.homeModel.currentBackground = (this.homeModel.currentBackground==this.homeModel.background1) ? this.homeModel.background2 : this.homeModel.background1;
 
     var bgImg = new Image();
     bgImg.onload = () => {
-        this.model.currentBackground.nativeElement.style.backgroundImage = `url('${imageURL}')`;
+        this.homeModel.currentBackground.nativeElement.style.backgroundImage = `url('${imageURL}')`;
         this.animationService.togglePhoto();
-        this.model.paused = false;
+        this.homeModel.paused = false;
     };
     bgImg.onerror = () => {
-      this.model.paused = false;
+      this.homeModel.paused = false;
     }
 
     bgImg.src = imageURL;
