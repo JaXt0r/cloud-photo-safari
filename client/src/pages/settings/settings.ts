@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, Events } from 'ionic-angular';
 
-import { SettingsModel } from '../../models/settingsModel';
+import { SettingsModel, HibernateSetting } from '../../models/settingsModel';
 
 
 
@@ -28,7 +28,7 @@ export class SettingsPage {
 export class TabSettings implements OnInit {
 
   private imageFrequency: any; 
-  hibernates = [[0, 1], [1, 2]]
+  hibernates: Array<HibernateSetting>;
   days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
 
 
@@ -37,6 +37,7 @@ export class TabSettings implements OnInit {
 
   ngOnInit() {
     this.imageFrequency = this.settingsModel.getImageFrequency();
+    this.hibernates     = this.settingsModel.getHibernates();
   }
 
 
@@ -46,12 +47,22 @@ export class TabSettings implements OnInit {
     this.events.publish('settingsPage.imageFrequencyChanged');
   }
 
+
+  /**
+   * Save any change back to settingsModel.
+   */
+  hibernateAltered() {
+    this.settingsModel.setHibernates(this.hibernates);
+  }
+
   onAddHibernate() {
-    this.hibernates.push([]);
+    this.hibernates.push(new HibernateSetting());
+    this.hibernateAltered();
   }
 
   onRemoveHibernate(index) {
     this.hibernates.splice(index, 1);
+    this.hibernateAltered();
   }
 
 

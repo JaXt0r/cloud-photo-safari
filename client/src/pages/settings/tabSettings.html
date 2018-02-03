@@ -37,16 +37,20 @@
           <ion-icon name="remove"></ion-icon>
         </button>
       </ion-col>
+      
       <ion-col col-5>
-        <ion-select cps-weekdays multiple="true" placeholder="Wochentage">
-            <ion-option *ngFor="let day of days">{{ day }}</ion-option>
-          </ion-select>
+        <ion-select cps-weekdays multiple="true" placeholder="Wochentage"
+        [(ngModel)]="hibernate.weekdays" (ionChange)="hibernateAltered()">
+          <ion-option *ngFor="let day of days" value="{{ day | lowercase }}">{{ day }}</ion-option>
+        </ion-select>
       </ion-col>
       <ion-col col-3>
-        <ion-datetime displayFormat="HH:mm" placeholder="Von"></ion-datetime>
+        <ion-datetime displayFormat="HH:mm" placeholder="Von"
+        [(ngModel)]="hibernate.from" (ionChange)="hibernateAltered()"></ion-datetime>
       </ion-col>
       <ion-col col-3>
-        <ion-datetime displayFormat="HH:mm" placeholder="Bis"></ion-datetime>    
+        <ion-datetime displayFormat="HH:mm" placeholder="Bis"
+        [(ngModel)]="hibernate.to" (ionChange)="hibernateAltered()"></ion-datetime>    
       </ion-col>
     </ion-row>
 
