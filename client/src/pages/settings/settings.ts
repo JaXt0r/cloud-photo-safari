@@ -51,7 +51,7 @@ export class TabSettings implements OnInit {
   }
 
   onRemoveHibernate(index) {
-    this.hibernates.splice(index, 1)
+    this.hibernates.splice(index, 1);
   }
 
 

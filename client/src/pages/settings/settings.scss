@@ -1,5 +1,11 @@
-page-settings {
-  [cps-weekdays] {
-    min-width: 90%;
+ion-app.md {
+  page-settings {
+    [cps-weekdays] {
+      min-width: 60%;
     }
+
+    [cps-hibernate-remove] {
+      margin-top: $content-margin / 2;
+    }
+  }
 }

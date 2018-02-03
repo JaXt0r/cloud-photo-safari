@@ -29,29 +29,33 @@
     </ion-label>
   </ion-item>
 
-  <ion-grid margin-left fixed>
+  <ion-grid margin-left>
     <ion-row *ngFor="let hibernate of hibernates; let i = index">
       <ion-col col-1>
-        <button (click)="onRemoveHibernate(i)" color="danger" ion-button outline small margin-left margin-top>
+        <button (click)="onRemoveHibernate(i)" color="danger"
+        ion-button outline block small cps-hibernate-remove margin-top>
           <ion-icon name="remove"></ion-icon>
         </button>
       </ion-col>
-      <ion-col>
+      <ion-col col-5>
         <ion-select cps-weekdays multiple="true" placeholder="Wochentage">
             <ion-option *ngFor="let day of days">{{ day }}</ion-option>
           </ion-select>
       </ion-col>
-      <ion-col>
+      <ion-col col-3>
         <ion-datetime displayFormat="HH:mm" placeholder="Von"></ion-datetime>
       </ion-col>
-      <ion-col>
+      <ion-col col-3>
         <ion-datetime displayFormat="HH:mm" placeholder="Bis"></ion-datetime>    
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <button (click)="onAddHibernate()" color="secondary" ion-button outline small margin-left margin-top><ion-icon name="add"></ion-icon></button>
+      <ion-col col-12>
+        <button (click)="onAddHibernate()" color="secondary"
+        ion-button outline block small cps-hibernate-remove margin-top>
+          <ion-icon name="add"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>
