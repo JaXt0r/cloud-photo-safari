@@ -41,7 +41,7 @@ export class SettingsModel {
 
 
 export class HibernateSetting {
-  weekdays: Array<String>;
+  weekdays: Uint16Array;
   from: string = "sdf";
   to: string;
 }
