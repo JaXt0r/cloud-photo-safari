@@ -45,16 +45,26 @@ export class CallbackService {
   }
 
 
+  /**
+   * (re)start image timer.
+   */
   private start() {
-    if (this.imageTimerSubscription instanceof Subscription) {
-      this.imageTimerSubscription.unsubscribe();
-    }
+    this.stop();
 
     console.log('new timer starting with', this.settingsModel.getImageFrequency());
     let timer = TimerObservable.create(0, this.settingsModel.getImageFrequency());
     this.imageTimerSubscription = timer.subscribe(() => this.timerCallback());
   }
 
+
+  /**
+   * Stop image timer for the moment.
+   */
+  private stop() {
+    if (this.imageTimerSubscription instanceof Subscription) {
+      this.imageTimerSubscription.unsubscribe();
+    }    
+  }
 
   private timerCallback() {
     console.log('currentFolder', this.model.currentFolder);
