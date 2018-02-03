@@ -31,13 +31,13 @@
 
   <ion-grid margin-left fixed>
     <ion-row *ngFor="let hibernate of hibernates; let i = index">
-      <ion-col>
+      <ion-col col-1>
         <button (click)="onRemoveHibernate(i)" color="danger" ion-button outline small margin-left margin-top>
           <ion-icon name="remove"></ion-icon>
         </button>
       </ion-col>
       <ion-col>
-        <ion-select multiple="true" placeholder="Wochentage">
+        <ion-select cps-weekdays multiple="true" placeholder="Wochentage">
             <ion-option *ngFor="let day of days">{{ day }}</ion-option>
           </ion-select>
       </ion-col>
