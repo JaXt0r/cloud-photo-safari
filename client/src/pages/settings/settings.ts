@@ -29,7 +29,9 @@ export class TabSettings implements OnInit {
 
   private imageFrequency: any; 
   hibernates: Array<HibernateSetting>;
-  days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+
+  // Index according to JavaScript's getDay() method.
+  days = [{i:1, n:"Mo"}, {i:2, n:"Di"}, {i:3, n:"Mi"}, {i:4, n:"Do"}, {i:5 ,n:"Fr"}, {i:6, n: "Sa"}, {i: 0, n: "So"}]
 
 
   constructor(private settingsModel: SettingsModel, private events: Events) { }

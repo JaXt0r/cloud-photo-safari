@@ -17,6 +17,7 @@ import { Subscription } from "rxjs/Subscription";
 export class CallbackService {
 
   private imageTimerSubscription: Subscription;
+  private hibernateTimerSubscription: Subscription;
 
 
   public constructor(private rest: RestService, private animationService: AnimationService,
@@ -31,6 +32,9 @@ export class CallbackService {
     });
 
     this.events.subscribe('settingsPage.imageFrequencyChanged', () => { this.start() });
+
+    // Let some timeout to ensure, that settingsModel already filled its values.
+    this.hibernateTimerSubscription = TimerObservable.create(1000, 5000).subscribe(() => this.hibernateTimerCallback());
   }
 
 
@@ -65,6 +69,45 @@ export class CallbackService {
     }    
   }
 
+
+  /**
+   * Check if image display should be paused at this time.
+   * 
+   * Attention: All checks are made local sensitive.
+   *  (Should be ok, because setTime and compareTime will be in same browser only)
+   */
+  private hibernateTimerCallback() {
+    let isHibernate = this.settingsModel.getHibernates().some(h => {
+      let now = new Date();
+
+      if (!h.weekdays || !h.from || !h.to) {
+        return false;
+      }
+
+      let isCurrentDay = h.weekdays.some(d => now.getDay() == d);
+      if (!isCurrentDay) {
+        return false;
+      }
+
+      ``
+      let current = new Date(`01/01/2001 ${now.getHours()}:${now.getMinutes()}:00`).getTime();
+      let from    = new Date(`01/01/2001 ${h.from}:00`).getTime();
+      let to      = new Date(`01/01/2001 ${h.to}:00`).getTime();
+
+      if (current >= from && current < to) {
+        return true;
+      }
+
+      return false;
+    });
+
+    if (isHibernate) {
+      this.stop();
+    }
+  }
+
+
+
   private timerCallback() {
     if (null !== this.model.currentFolder && undefined !== this.model.currentFolder && !this.model.paused) {
       this.model.paused = true;
@@ -87,7 +130,7 @@ export class CallbackService {
     var bgImg = new Image();
     bgImg.onload = () => {
         this.model.currentBackground.nativeElement.style.backgroundImage = `url('${imageURL}')`;
-        this.togglePhoto();
+        this.animationService.togglePhoto();
         this.model.paused = false;
     };
     bgImg.onerror = () => {
@@ -96,9 +139,4 @@ export class CallbackService {
 
     bgImg.src = imageURL;
   }
-
-    
-  private togglePhoto() {
-    this.animationService.togglePhoto();
-  }  
 }

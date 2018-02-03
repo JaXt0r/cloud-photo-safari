@@ -41,7 +41,7 @@
       <ion-col col-5>
         <ion-select cps-weekdays multiple="true" placeholder="Wochentage"
         [(ngModel)]="hibernate.weekdays" (ionChange)="hibernateAltered()">
-          <ion-option *ngFor="let day of days; let i=index" value="{{ i }}">{{ day }}</ion-option>
+          <ion-option *ngFor="let day of days" value="{{ day.i }}">{{ day.n }}</ion-option>
         </ion-select>
       </ion-col>
       <ion-col col-3>
