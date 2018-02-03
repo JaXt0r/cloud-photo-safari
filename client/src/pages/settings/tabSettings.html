@@ -22,15 +22,13 @@
       </ion-select>
     </ion-item>
 
-</ion-list>
-<ion-list>
-  <ion-list-header no-margin>
+  <ion-item no-lines>
     <ion-label no-margin>
-      <ion-icon name="moon" padding-right></ion-icon>
+      <ion-icon name="moon"></ion-icon>
       Pause
     </ion-label>
-  </ion-list-header>
-  
+  </ion-item>
+
   <ion-grid margin-left fixed>
     <ion-row *ngFor="let hibernate of hibernates">
       <ion-col>
@@ -46,7 +44,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <button (click)="onAddHibernate()" ion-button round margin-left><ion-icon name="add"></ion-icon></button>
 </ion-list>
 
 </ion-content>
