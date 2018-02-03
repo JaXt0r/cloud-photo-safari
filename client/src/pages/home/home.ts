@@ -38,6 +38,9 @@ export class HomePage implements OnInit {
     this.waitForBackend();
   }
 
+  /**
+   * Loading during startup.
+   */
   private waitForBackend() {
     this.restService.getHealth().subscribe((response: any) => {
       if (response && response.status === 'UP') {
