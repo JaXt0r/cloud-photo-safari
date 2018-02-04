@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, Events } from 'ionic-angular';
 
-import { SettingsModel, HibernateSetting } from '../../models/settingsModel';
+import { SettingsModel, SleepModeSetting } from '../../models/settingsModel';
 
 
 
@@ -28,7 +28,7 @@ export class SettingsPage {
 export class TabSettings implements OnInit {
 
   private imageFrequency: any; 
-  hibernates: Array<HibernateSetting>;
+  sleepModes: Array<SleepModeSetting>;
 
   // Index according to JavaScript's getDay() method.
   days = [{i:1, n:"Mo"}, {i:2, n:"Di"}, {i:3, n:"Mi"}, {i:4, n:"Do"}, {i:5 ,n:"Fr"}, {i:6, n: "Sa"}, {i: 0, n: "So"}]
@@ -39,7 +39,7 @@ export class TabSettings implements OnInit {
 
   ngOnInit() {
     this.imageFrequency = this.settingsModel.getImageFrequency();
-    this.hibernates     = this.settingsModel.getHibernates();
+    this.sleepModes     = this.settingsModel.getSleepModes();
   }
 
 
@@ -53,18 +53,18 @@ export class TabSettings implements OnInit {
   /**
    * Save any change back to settingsModel.
    */
-  hibernateAltered() {
-    this.settingsModel.setHibernates(this.hibernates);
+  sleepModeAltered() {
+    this.settingsModel.setSleepModes(this.sleepModes);
   }
 
-  onAddHibernate() {
-    this.hibernates.push(new HibernateSetting());
-    this.hibernateAltered();
+  onAddSleepMode() {
+    this.sleepModes.push(new SleepModeSetting());
+    this.sleepModeAltered();
   }
 
-  onRemoveHibernate(index) {
-    this.hibernates.splice(index, 1);
-    this.hibernateAltered();
+  onRemoveSleepMode(index) {
+    this.sleepModes.splice(index, 1);
+    this.sleepModeAltered();
   }
 
 

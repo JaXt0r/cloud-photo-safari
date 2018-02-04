@@ -30,34 +30,34 @@
   </ion-item>
 
   <ion-grid margin-left>
-    <ion-row *ngFor="let hibernate of hibernates; let i = index">
+    <ion-row *ngFor="let sleepMode of sleepModes; let i = index">
       <ion-col col-1>
-        <button (click)="onRemoveHibernate(i)" color="danger"
-        ion-button outline block small cps-hibernate-remove margin-top>
+        <button (click)="onRemoveSleepMode(i)" color="danger"
+        ion-button outline block small cps-sleepMode-remove margin-top>
           <ion-icon name="remove"></ion-icon>
         </button>
       </ion-col>
       
       <ion-col col-5>
         <ion-select cps-weekdays multiple="true" placeholder="Wochentage"
-        [(ngModel)]="hibernate.weekdays" (ionChange)="hibernateAltered()">
+        [(ngModel)]="sleepMode.weekdays" (ionChange)="sleepModeAltered()">
           <ion-option *ngFor="let day of days" value="{{ day.i }}">{{ day.n }}</ion-option>
         </ion-select>
       </ion-col>
       <ion-col col-3>
         <ion-datetime displayFormat="HH:mm" placeholder="Von"
-        [(ngModel)]="hibernate.from" (ionChange)="hibernateAltered()"></ion-datetime>
+        [(ngModel)]="sleepMode.from" (ionChange)="sleepModeAltered()"></ion-datetime>
       </ion-col>
       <ion-col col-3>
         <ion-datetime displayFormat="HH:mm" placeholder="Bis"
-        [(ngModel)]="hibernate.to" (ionChange)="hibernateAltered()"></ion-datetime>    
+        [(ngModel)]="sleepMode.to" (ionChange)="sleepModeAltered()"></ion-datetime>    
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col col-12>
-        <button (click)="onAddHibernate()" color="secondary"
-        ion-button outline block small cps-hibernate-remove margin-top>
+        <button (click)="onAddSleepMode()" color="secondary"
+        ion-button outline block small cps-sleepMode-remove margin-top>
           <ion-icon name="add"></ion-icon>
         </button>
       </ion-col>

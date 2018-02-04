@@ -8,16 +8,16 @@ export class HomeModel {
   public currentFolder: any;
   public background1: any;
   public background2: any;
-  public hibernateBg: any;
+  public sleepModeBg: any;
   
   public paused: boolean = false;
-  public hibernated: boolean = false;
+  public isSleepMode: boolean = false;
 
       
-  public init(currentBackground: any, background1: any, background2: any, hibernateBg) {
+  public init(currentBackground: any, background1: any, background2: any, sleepModeBg) {
     this.currentBackground = currentBackground;
     this.background1 = background1;
     this.background2 = background2;
-    this.hibernateBg = hibernateBg;
+    this.sleepModeBg = sleepModeBg;
   }
 }

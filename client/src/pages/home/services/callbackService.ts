@@ -17,7 +17,7 @@ import { Subscription } from "rxjs/Subscription";
 export class CallbackService {
 
   private imageTimerSubscription: Subscription;
-  private hibernateTimerSubscription: Subscription;
+  private sleepModeTimerSubscription: Subscription;
 
 
   public constructor(private rest: RestService, private animationService: AnimationService,
@@ -34,7 +34,7 @@ export class CallbackService {
     this.events.subscribe('settingsPage.imageFrequencyChanged', () => { this.start() });
 
     // Let some timeout to ensure, that settingsModel already filled its values.
-    this.hibernateTimerSubscription = TimerObservable.create(1000, 5000).subscribe(() => this.hibernateTimerCallback());
+    this.sleepModeTimerSubscription = TimerObservable.create(1000, 5000).subscribe(() => this.sleepModeTimerCallback());
   }
 
 
@@ -79,8 +79,8 @@ export class CallbackService {
    * Attention: All checks are made local sensitive.
    *  (Should be ok, because setTime and compareTime will be in same browser only)
    */
-  private hibernateTimerCallback() {
-    let isHibernateTime = this.settingsModel.getHibernates().some(h => {
+  private sleepModeTimerCallback() {
+    let isSleepModeTime = this.settingsModel.getSleepModes().some(h => {
       let now = new Date();
 
       if (!h.weekdays || !h.from || !h.to) {
@@ -104,18 +104,18 @@ export class CallbackService {
       return false;
     });
 
-    if (isHibernateTime && !this.homeModel.hibernated) {
-      console.log('start hibernate');
-      this.homeModel.hibernated = true;
+    if (isSleepModeTime && !this.homeModel.isSleepMode) {
+      console.log('start sleepMode');
+      this.homeModel.isSleepMode = true;
 
       this.stop();
-      this.animationService.startHibernateMode();
-    } else if (!isHibernateTime && this.homeModel.hibernated) {
-      this.homeModel.hibernated = false;
+      this.animationService.startSleepModeMode();
+    } else if (!isSleepModeTime && this.homeModel.isSleepMode) {
+      this.homeModel.isSleepMode = false;
 
-      console.log('end hibernate');
+      console.log('end sleepMode');
       this.start();
-      this.animationService.endHibernateMode();
+      this.animationService.endSleepModeMode();
     }
   }
 

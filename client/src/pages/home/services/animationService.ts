@@ -79,20 +79,20 @@ export class AnimationService {
     }
 
 
-    public startHibernateMode() {
+    public startSleepModeMode() {
       const duration = 1000;
 
       this.animationBuilder
         .build([ animate(duration, style({opacity: 1})) ])
-        .create(this.model.hibernateBg.nativeElement).play();
+        .create(this.model.sleepModeBg.nativeElement).play();
     }
 
-    public endHibernateMode() {
+    public endSleepModeMode() {
       const duration = 1000;
 
       this.animationBuilder
         .build([ animate(duration, style({opacity: 0})) ])
-        .create(this.model.hibernateBg.nativeElement).play();
+        .create(this.model.sleepModeBg.nativeElement).play();
     }
 
 }

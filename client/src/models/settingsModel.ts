@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 export class SettingsModel {
 
   private imageFrequency: number = 10000;
-  private hibernates: Array<HibernateSetting> = [];
+  private sleepModes: Array<SleepModeSetting> = [];
 
 
   public constructor(private storage: Storage) {
@@ -16,9 +16,9 @@ export class SettingsModel {
       }
     });
 
-    this.storage.get('settings.hibernates').then((val) => {
+    this.storage.get('settings.sleepModes').then((val) => {
       if (null !== val) {
-        this.hibernates = val
+        this.sleepModes = val
       }
     });    
   }
@@ -31,16 +31,16 @@ export class SettingsModel {
   }
 
 
-  public getHibernates(): Array<HibernateSetting> { return this.hibernates }
-  public setHibernates(hibernates: Array<HibernateSetting>) {
-    this.hibernates = hibernates;
-    this.storage.set('settings.hibernates', hibernates);
+  public getSleepModes(): Array<SleepModeSetting> { return this.sleepModes }
+  public setSleepModes(sleepModes: Array<SleepModeSetting>) {
+    this.sleepModes = sleepModes;
+    this.storage.set('settings.sleepModes', sleepModes);
   }
 }
 
 
 
-export class HibernateSetting {
+export class SleepModeSetting {
   weekdays: Uint16Array;
   from: string = "sdf";
   to: string;
