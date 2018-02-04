@@ -78,12 +78,26 @@ cd client && ionic build --prod && cd ..
 
 # Deploy
 
-```
-cd server/target
-scp cloud_photo_safari-1.0-SNAPSHOT.jar pi@192.168.2.129:/home/pi/Documents/cloud-photo-safari/server.jar
-cd server
+## initial
+
+``
 scp -r .flickrAuth/ pi@192.168.2.129:/home/pi/Documents/cloud-photo-safari/
+``
+
+## new Version
+
+```
+set PI_LOGIN=pi@192.168.2.129
+
+cd server
+mvn clean package
+scp target/cloud_photo_safari-1.0-SNAPSHOT.jar %PI_LOGIN%:/home/pi/Documents/cloud-photo-safari/server.jar
+cd ..
 
 cd client/
-scp -r www/* pi@192.168.2.129:/home/pi/Documents/cloud-photo-safari/client/
+ionic build --prod
+scp -r www/* %PI_LOGIN%:/home/pi/Documents/cloud-photo-safari/client/
+cd ..
+
+ssh %PI_LOGIN% 'sudo reboot'
 ```
