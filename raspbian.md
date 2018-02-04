@@ -81,7 +81,9 @@ cd client && ionic build --prod && cd ..
 ## initial
 
 ``
-scp -r .flickrAuth/ pi@192.168.2.129:/home/pi/Documents/cloud-photo-safari/
+set PI_LOGIN=pi@192.168.2.129
+
+scp -r server/.flickrAuth/ %PI_LOGIN%:/home/pi/Documents/cloud-photo-safari/
 ``
 
 ## new Version
