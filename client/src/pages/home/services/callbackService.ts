@@ -16,8 +16,6 @@ import { Subscription } from "rxjs/Subscription";
 @Injectable()
 export class CallbackService {
 
-  private HIBERNATE_IMAGE = {sizes: {large_1600: {url: '/assets/imgs/logo.png'}}};
-
   private imageTimerSubscription: Subscription;
   private hibernateTimerSubscription: Subscription;
 
@@ -55,8 +53,6 @@ export class CallbackService {
    * (re)start image timer.
    */
   private start() {
-    this.homeModel.hibernated = true;
-
     // No double start!
     if (this.imageTimerSubscription instanceof Subscription) {
       this.imageTimerSubscription.unsubscribe();
@@ -71,8 +67,6 @@ export class CallbackService {
    * Stop image timer for the moment.
    */
   private stop() {
-    this.homeModel.hibernated = false;
-
     if (this.imageTimerSubscription instanceof Subscription) {
       this.imageTimerSubscription.unsubscribe();
     }
@@ -86,7 +80,7 @@ export class CallbackService {
    *  (Should be ok, because setTime and compareTime will be in same browser only)
    */
   private hibernateTimerCallback() {
-    let isHibernate = this.settingsModel.getHibernates().some(h => {
+    let isHibernateTime = this.settingsModel.getHibernates().some(h => {
       let now = new Date();
 
       if (!h.weekdays || !h.from || !h.to) {
@@ -110,13 +104,18 @@ export class CallbackService {
       return false;
     });
 
-    if (isHibernate && this.homeModel.hibernated) {
+    if (isHibernateTime && !this.homeModel.hibernated) {
       console.log('start hibernate');
+      this.homeModel.hibernated = true;
+
       this.stop();
-      this.randomPhotoCallback(this.HIBERNATE_IMAGE);
-    } else if (!isHibernate && !this.homeModel.hibernated) {
+      this.animationService.startHibernateMode();
+    } else if (!isHibernateTime && this.homeModel.hibernated) {
+      this.homeModel.hibernated = false;
+
       console.log('end hibernate');
       this.start();
+      this.animationService.endHibernateMode();
     }
   }
 

@@ -78,4 +78,21 @@ export class AnimationService {
       });
     }
 
+
+    public startHibernateMode() {
+      const duration = 1000;
+
+      this.animationBuilder
+        .build([ animate(duration, style({opacity: 1})) ])
+        .create(this.model.hibernateBg.nativeElement).play();
+    }
+
+    public endHibernateMode() {
+      const duration = 1000;
+
+      this.animationBuilder
+        .build([ animate(duration, style({opacity: 0})) ])
+        .create(this.model.hibernateBg.nativeElement).play();
+    }
+
 }

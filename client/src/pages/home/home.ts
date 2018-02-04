@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
 
   @ViewChild('background1') background1: any;
   @ViewChild('background2') background2: any;
-
+  @ViewChild('hibernateBg') hibernateBg: any;
 
   constructor(
     public navCtrl: NavController,
@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
   private waitForBackend() {
     this.restService.getHealth().subscribe((response: any) => {
       if (response && response.status === 'UP') {
-        this.homeModel.init(this.background1, this.background1, this.background2);
+        this.homeModel.init(this.background1, this.background1, this.background2, this.hibernateBg);
         this.callbackService.init();
 
         this.loading.dismiss();
