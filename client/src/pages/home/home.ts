@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, ActionSheetController, ModalController, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { HomeModel } from '../../models/homeModel';
 import { CallbackService } from './services/callbackService';
@@ -24,7 +25,7 @@ export class HomePage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: ActionSheetController, private modalCtrl: ModalController, private loadingCtrl: LoadingController,
     private callbackService: CallbackService, private restService: RestService,
-    private homeModel: HomeModel
+    private homeModel: HomeModel, private storage: Storage
   ) {}
 
 
@@ -36,6 +37,12 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.waitForBackend();
+
+    this.storage.get('home.menu').then((val) => {
+      if (val !== null && val !== undefined) {
+        this.homeModel.menu = val;
+      }
+    });
   }
 
   /**
@@ -89,9 +96,10 @@ export class HomePage implements OnInit {
         },
         {
           icon: 'shuffle',
-          cssClass: 'menu-active',
+          cssClass: this.homeModel.menu.isShuffle ? 'menu-active' : '',
           handler: () => {
-
+            this.homeModel.menu.isShuffle = !this.homeModel.menu.isShuffle;
+            this.saveMenu();
           }
         }
         /*,{
@@ -114,5 +122,9 @@ export class HomePage implements OnInit {
         }*/
       ]
     }).present();
+  }
+
+  private saveMenu() {
+    this.storage.set('home.menu', this.homeModel.menu);
   }
 }

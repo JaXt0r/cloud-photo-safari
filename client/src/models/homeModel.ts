@@ -13,6 +13,10 @@ export class HomeModel {
   public paused: boolean = false;
   public isSleepMode: boolean = false;
 
+  public menu = {
+    isShuffle: true,
+  }
+
       
   public init(currentBackground: any, background1: any, background2: any, sleepModeBg) {
     this.currentBackground = currentBackground;
