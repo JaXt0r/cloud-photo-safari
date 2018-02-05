@@ -51,6 +51,14 @@ export class CallbackService {
   }
 
 
+  public startOrStop() {
+    if (this.homeModel.menu.isPaused) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  }
+
   /**
    * (re)start image timer.
    */
@@ -111,31 +119,31 @@ export class CallbackService {
       this.homeModel.isSleepMode = true;
 
       this.stop();
-      this.animationService.startSleepModeMode();
+      this.animationService.startSleepMode();
     } else if (!isSleepModeTime && this.homeModel.isSleepMode) {
       this.homeModel.isSleepMode = false;
 
       console.log('end sleepMode');
       this.start();
-      this.animationService.endSleepModeMode();
+      this.animationService.endSleepMode();
     }
   }
 
 
 
   private timerCallback() {
-    if (null !== this.homeModel.currentFolder && undefined !== this.homeModel.currentFolder && !this.homeModel.paused) {
-      this.homeModel.paused = true;
+    if (null !== this.homeModel.currentFolder && undefined !== this.homeModel.currentFolder && !this.homeModel.isLoadingImage) {
+      this.homeModel.isLoadingImage = true;
 
       if (this.homeModel.menu.isShuffle) {
         this.rest.getRandomPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe(
           (photo) => this.photoCallback(photo),
-          () => this.homeModel.paused = false
+          () => this.homeModel.isLoadingImage = false
         );
       } else {
         this.rest.getNextPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe(
           (photo) => this.photoCallback(photo),
-          () => this.homeModel.paused = false
+          () => this.homeModel.isLoadingImage = false
         );
       }
     }
@@ -159,10 +167,10 @@ export class CallbackService {
     bgImg.onload = () => {
         this.homeModel.currentBackground.nativeElement.style.backgroundImage = `url('${imageURL}')`;
         this.animationService.togglePhoto();
-        this.homeModel.paused = false;
+        this.homeModel.isLoadingImage = false;
     };
     bgImg.onerror = () => {
-      this.homeModel.paused = false;
+      this.homeModel.isLoadingImage = false;
     }
 
     bgImg.src = imageURL;

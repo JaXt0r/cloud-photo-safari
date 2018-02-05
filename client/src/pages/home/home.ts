@@ -80,32 +80,34 @@ export class HomePage implements OnInit {
           handler: () => {
             this.navCtrl.push(SettingsPage);
           }
-        },
-        {
+        },{
           icon: 'folder-open',
           handler: () => {
             let folderModal = this.modalCtrl.create(FolderSwitcher);
             folderModal.present();
           }
-        },
-        {
+        },{
           icon: 'refresh',
           handler: () => {
             window.location.reload();
           }
-        },
-        {
+        },{
           icon: 'shuffle',
           cssClass: this.homeModel.menu.isShuffle ? 'menu-active' : '',
           handler: () => {
             this.homeModel.menu.isShuffle = !this.homeModel.menu.isShuffle;
             this.saveMenu();
           }
+        },{
+          icon: 'pause',
+          cssClass: this.homeModel.menu.isPaused ? 'menu-active' : '',
+          handler: () => {
+            this.homeModel.menu.isPaused = !this.homeModel.menu.isPaused;
+            this.saveMenu();
+            this.callbackService.startOrStop();
+          }
         }
-        /*,{
-          icon: 'pause'
-        },
-        {
+        /*{
           icon: 'skip-backward'
         },
         {

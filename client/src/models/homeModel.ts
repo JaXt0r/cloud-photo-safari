@@ -10,11 +10,12 @@ export class HomeModel {
   public background2: any;
   public sleepModeBg: any;
   
-  public paused: boolean = false;
+  public isLoadingImage: boolean = false;
   public isSleepMode: boolean = false;
 
   public menu = {
-    isShuffle: true,
+    isShuffle: false,
+    isPaused: false
   }
 
       

@@ -79,7 +79,7 @@ export class AnimationService {
     }
 
 
-    public startSleepModeMode() {
+    public startSleepMode() {
       const duration = 1000;
 
       this.animationBuilder
@@ -87,7 +87,7 @@ export class AnimationService {
         .create(this.model.sleepModeBg.nativeElement).play();
     }
 
-    public endSleepModeMode() {
+    public endSleepMode() {
       const duration = 1000;
 
       this.animationBuilder
