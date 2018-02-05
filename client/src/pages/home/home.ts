@@ -99,15 +99,26 @@ export class HomePage implements OnInit {
           handler: () => {
             this.homeModel.menu.isPaused = !this.homeModel.menu.isPaused;
             this.saveMenu();
-            this.callbackService.startOrStop();
+
+
+            if (this.homeModel.menu.isPaused) {
+              this.callbackService.stop();
+            } else {
+              this.callbackService.start();
+            }
           }
         }
         /*{
           icon: 'skip-backward'
-        },
-        {
-          icon: 'skip-forward'
-        },
+        },*/
+        ,{
+          icon: 'skip-forward',
+          handler: () => {
+            // What a wonderful hack. Erm, I mean usage. :D
+            this.callbackService.stop();
+            this.callbackService.start();
+          }
+        }/*,
         {
           icon: 'copy'
         },

@@ -50,19 +50,10 @@ export class CallbackService {
     });
   }
 
-
-  public startOrStop() {
-    if (this.homeModel.menu.isPaused) {
-      this.stop();
-    } else {
-      this.start();
-    }
-  }
-
   /**
    * (re)start image timer.
    */
-  private start() {
+  public start() {
     // No double start!
     if (this.imageTimerSubscription instanceof Subscription) {
       this.imageTimerSubscription.unsubscribe();
@@ -76,7 +67,7 @@ export class CallbackService {
   /**
    * Stop image timer for the moment.
    */
-  private stop() {
+  public stop() {
     if (this.imageTimerSubscription instanceof Subscription) {
       this.imageTimerSubscription.unsubscribe();
     }
@@ -132,6 +123,11 @@ export class CallbackService {
 
 
   private timerCallback() {
+    if (this.homeModel.menu.isPaused) {
+      // Easiest way to disable callback: when its called. So we don't need to secure every external button or setting change. Just this callback. :-)
+      this.stop();
+    }
+
     if (null !== this.homeModel.currentFolder && undefined !== this.homeModel.currentFolder && !this.homeModel.isLoadingImage) {
       this.homeModel.isLoadingImage = true;
 
