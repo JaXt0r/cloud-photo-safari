@@ -86,12 +86,15 @@ export class HomePage implements OnInit {
           handler: () => {
             window.location.reload();
           }
-        }
-        /*,
-        {
-          icon: 'shuffle'
         },
         {
+          icon: 'shuffle',
+          cssClass: 'menu-active',
+          handler: () => {
+
+          }
+        }
+        /*,{
           icon: 'pause'
         },
         {

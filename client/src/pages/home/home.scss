@@ -27,9 +27,15 @@ page-home {
   }
 
   .action-sheet-wrapper {
-    max-width: 12em;
+    max-width: 16em;
     button {
       width: 3.5em;
+    }
+  }
+
+  .menu-active {
+    ion-icon {
+      color: color($colors, secondary);
     }
   }
 }
