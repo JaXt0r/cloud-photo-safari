@@ -128,9 +128,15 @@ export class CallbackService {
       this.homeModel.paused = true;
 
       if (this.homeModel.menu.isShuffle) {
-        this.rest.getRandomPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe((photo) => this.photoCallback(photo));
+        this.rest.getRandomPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe(
+          (photo) => this.photoCallback(photo),
+          () => this.homeModel.paused = false
+        );
       } else {
-        this.rest.getNextPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe((photo) => this.photoCallback(photo));
+        this.rest.getNextPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe(
+          (photo) => this.photoCallback(photo),
+          () => this.homeModel.paused = false
+        );
       }
     }
   }
