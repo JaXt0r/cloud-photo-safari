@@ -126,16 +126,21 @@ export class CallbackService {
   private timerCallback() {
     if (null !== this.homeModel.currentFolder && undefined !== this.homeModel.currentFolder && !this.homeModel.paused) {
       this.homeModel.paused = true;
-      this.rest.getRandomPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe((photo) => this.randomPhotoCallback(photo));
+
+      if (this.homeModel.menu.isShuffle) {
+        this.rest.getRandomPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe((photo) => this.photoCallback(photo));
+      } else {
+        this.rest.getNextPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe((photo) => this.photoCallback(photo));
+      }
     }
   }
   
 
   /**
-   * Preload photo so that it can be loaded smoothely afterwards.
+   * Preload photo so that it can be loaded smoothly afterwards.
    * @param photo 
    */
-  private randomPhotoCallback(photo: any) {
+  private photoCallback(photo: any) {
     let imageURL = photo.sizes.large_1600.url;
     this.homeModel.currentBackground = (this.homeModel.currentBackground==this.homeModel.background1) ? this.homeModel.background2 : this.homeModel.background1;
     this.homeModel.currentFolder.currentPhotoIndex = photo.photosetIndex;

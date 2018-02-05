@@ -51,23 +51,45 @@ class PhotosetController : AbstractFlickrController() {
 
     @RequestMapping("randomPhoto/{photosetId}/{prevPhotosetIndex}")
     fun getRandomPhoto(@PathVariable("photosetId") photosetId: String, @PathVariable("prevPhotosetIndex") prevPhotosetIndex: Int): PhotoData {
+        return getImage(photosetId, prevPhotosetIndex, true)
+    }
+
+
+    @RequestMapping("nextPhoto/{photosetId}/{prevPhotosetIndex}")
+    fun getNextPhoto(@PathVariable("photosetId") photosetId: String, @PathVariable("prevPhotosetIndex") prevPhotosetIndex: Int): PhotoData {
+        return getImage(photosetId, prevPhotosetIndex, false)
+    }
+
+
+    private fun getImage(photosetId: String, prevIndex: Int, isShuffle: Boolean): PhotoData {
         val photoset = photosetsIntface.getInfo(photosetId)
-        var randomIndex: Int
+        var index = getIndex(prevIndex, photoset.photoCount, isShuffle)
 
-        // Don't deliver original photo again.
-        do {
-            // Index is from 1...n
-            randomIndex = RandomUtils.nextInt(1, photoset.photoCount + 1)
-        } while (prevPhotosetIndex == randomIndex && photoset.photoCount > 1)
-
-        val photo = photosetsIntface.getPhotos(photoset.id, 1, randomIndex).first()
+        val photo = photosetsIntface.getPhotos(photoset.id, 1, index).first()
 
         var photoData = photo.jmap(Photo::class.java, PhotoData::class.java)
 
         appendAllPhotoSizes(photoData)
-        photoData.photosetIndex = randomIndex
+        photoData.photosetIndex = index
 
         return photoData
+    }
+
+
+    private fun getIndex(prevIndex: Int, photoCount: Int, shuffle: Boolean): Int {
+        var newIndex: Int
+
+        if (shuffle) {
+            // Don't deliver original photo again.
+            do {
+                // Index is from 1...n
+                newIndex = RandomUtils.nextInt(1, photoCount + 1)
+            } while (prevIndex == newIndex && photoCount > 1)
+        } else {
+            newIndex = if (prevIndex == photoCount) 1 else (prevIndex + 1)
+        }
+
+        return newIndex
     }
 
 
