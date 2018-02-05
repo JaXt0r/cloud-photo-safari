@@ -3,12 +3,12 @@ package de.mdaehner.cloud_photo_safari.model
 import com.googlecode.jmapper.annotations.JGlobalMap
 
 
-@JGlobalMap(excluded = ["sizes"])
+@JGlobalMap(excluded = ["photosetIndex", "sizes"])
 class PhotoData {
     lateinit var id: String
 
+    var photosetIndex: Int = 0
     val sizes: MutableMap<String, PhotoSize> = HashMap()
-
 }
 
 /**

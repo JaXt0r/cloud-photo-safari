@@ -16,8 +16,8 @@ export class RestService {
     return this.http.get(this.apiUrl+'/photoset/list');
   }
 
-  getRandomPhoto(photosetId: String) {
-    return this.http.get(`${this.apiUrl}/photoset/randomPhoto/${photosetId}`)
+  getRandomPhoto(photosetId: String, currentPhotoIndex: number) {
+    return this.http.get(`${this.apiUrl}/photoset/randomPhoto/${photosetId}/${currentPhotoIndex}`)
   }
 
 }

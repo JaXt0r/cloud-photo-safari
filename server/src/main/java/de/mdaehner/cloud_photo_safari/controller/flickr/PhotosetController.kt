@@ -40,7 +40,7 @@ class PhotosetController : AbstractFlickrController() {
         // Add URL from response. Don't load all sizes manually because everz photoset would generate another call.
         response.forEach {
             val convertedPhoto = it
-            val origPhoto = photosets.first{ it.id == convertedPhoto.id }.primaryPhoto
+            val origPhoto = photosets.first { it.id == convertedPhoto.id }.primaryPhoto
 
             convertedPhoto.primaryPhoto.sizes.put("large_square", PhotoSize("Square Large", origPhoto.squareLargeUrl, origPhoto.squareLargeSize.height, origPhoto.squareLargeSize.width))
         }
@@ -49,15 +49,23 @@ class PhotosetController : AbstractFlickrController() {
     }
 
 
-    @RequestMapping("randomPhoto/{photosetId}")
-    fun getRandomPhoto(@PathVariable("photosetId")  photosetId: String): PhotoData {
+    @RequestMapping("randomPhoto/{photosetId}/{prevPhotosetIndex}")
+    fun getRandomPhoto(@PathVariable("photosetId") photosetId: String, @PathVariable("prevPhotosetIndex") prevPhotosetIndex: Int): PhotoData {
         val photoset = photosetsIntface.getInfo(photosetId)
-        val randomIndex = RandomUtils.nextInt(0, photoset.photoCount)
+        var randomIndex: Int
+
+        // Don't deliver original photo again.
+        do {
+            // Index is from 1...n
+            randomIndex = RandomUtils.nextInt(1, photoset.photoCount + 1)
+        } while (prevPhotosetIndex == randomIndex && photoset.photoCount > 1)
+
         val photo = photosetsIntface.getPhotos(photoset.id, 1, randomIndex).first()
 
         var photoData = photo.jmap(Photo::class.java, PhotoData::class.java)
 
         appendAllPhotoSizes(photoData)
+        photoData.photosetIndex = randomIndex
 
         return photoData
     }
@@ -71,10 +79,9 @@ class PhotosetController : AbstractFlickrController() {
         val sizes = photosIntface.getSizes(photoData.id)
 
         sizes.forEach({
-          photoData.sizes.put(
-                  SIZE_LABELS[it.label].toLowerCase().replace(" ", "_"), // nice looking key
-                  PhotoSize(SIZE_LABELS[it.label], it.source, it.height, it.width))
+            photoData.sizes.put(
+                    SIZE_LABELS[it.label].toLowerCase().replace(" ", "_"), // nice looking key
+                    PhotoSize(SIZE_LABELS[it.label], it.source, it.height, it.width))
         })
     }
-
 }

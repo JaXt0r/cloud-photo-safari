@@ -26,6 +26,8 @@ export class CallbackService {
   ) {
     this.events.subscribe('home.changeImageFolder', (folder) => {
       this.homeModel.currentFolder = folder;
+      // If sequence is activated, then the next round will start with element >0<
+      this.homeModel.currentFolder.currentPhotoIndex = folder.photoCount;
       this.storage.set('home.imageFolder', folder);
 
       this.start();
@@ -124,7 +126,7 @@ export class CallbackService {
   private timerCallback() {
     if (null !== this.homeModel.currentFolder && undefined !== this.homeModel.currentFolder && !this.homeModel.paused) {
       this.homeModel.paused = true;
-      this.rest.getRandomPhoto(this.homeModel.currentFolder.id).subscribe((photo) => this.randomPhotoCallback(photo));
+      this.rest.getRandomPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe((photo) => this.randomPhotoCallback(photo));
     }
   }
   
@@ -136,6 +138,7 @@ export class CallbackService {
   private randomPhotoCallback(photo: any) {
     let imageURL = photo.sizes.large_1600.url;
     this.homeModel.currentBackground = (this.homeModel.currentBackground==this.homeModel.background1) ? this.homeModel.background2 : this.homeModel.background1;
+    this.homeModel.currentFolder.currentPhotoIndex = photo.photosetIndex;
 
     var bgImg = new Image();
     bgImg.onload = () => {
