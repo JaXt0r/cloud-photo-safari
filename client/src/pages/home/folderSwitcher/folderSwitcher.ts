@@ -5,7 +5,7 @@ import { RestService } from '../../../services/restService';
 
 
 @Component({
-  selector: 'page-home-folderSwitcher',
+  selector: 'page-home-folderswitcher',
   templateUrl: 'folderSwitcher.html'
 })
 export class FolderSwitcher {

@@ -22,6 +22,7 @@ class PhotosetController : AbstractFlickrController() {
     /**
      * Taken from:
      * @see com.flickr4java.flickr.photos.Size.lstSizes
+     * @see https://www.flickr.com/services/api/misc.urls.html
      */
     private val SIZE_LABELS: Array<String> = arrayOf("Thumbnail", "Square", "Small", "Medium", "Large", "Original", "Large Square", "Small 320", "Medium 640", "Medium 800", "Large 1600", "Large 2048", "Site MP4", "Video Player", "Video Original", "Mobile MP4", "HD MP4")
 
@@ -32,11 +33,17 @@ class PhotosetController : AbstractFlickrController() {
 
     @RequestMapping("list")
     fun getList(): List<PhotosetData> {
-        var photosets = photosetsIntface.getList(nsid, "url_o").photosets
+        var photosets = photosetsIntface.getList(nsid, "url_q").photosets
 
         var response = photosets.jmap(Photoset::class.java, PhotosetData::class.java)
 
-        response.map { appendPhotoSizes(it.primaryPhoto) }
+        // Add URL from response. Don't load all sizes manually because everz photoset would generate another call.
+        response.forEach {
+            val convertedPhoto = it
+            val origPhoto = photosets.first{ it.id == convertedPhoto.id }.primaryPhoto
+
+            convertedPhoto.primaryPhoto.sizes.put("large_square", PhotoSize("Square Large", origPhoto.squareLargeUrl, origPhoto.squareLargeSize.height, origPhoto.squareLargeSize.width))
+        }
 
         return response
     }
@@ -50,7 +57,7 @@ class PhotosetController : AbstractFlickrController() {
 
         var photoData = photo.jmap(Photo::class.java, PhotoData::class.java)
 
-        appendPhotoSizes(photoData)
+        appendAllPhotoSizes(photoData)
 
         return photoData
     }
@@ -58,8 +65,9 @@ class PhotosetController : AbstractFlickrController() {
 
     /**
      * Manually map the URLs, because we want some customizings.
+     * Unfortunately some URLs like 1600px won't be loaded by the initial call. So this method comes to the rescure and loads all! image sizes.
      */
-    private fun appendPhotoSizes(photoData: PhotoData) {
+    private fun appendAllPhotoSizes(photoData: PhotoData) {
         val sizes = photosIntface.getSizes(photoData.id)
 
         sizes.forEach({
