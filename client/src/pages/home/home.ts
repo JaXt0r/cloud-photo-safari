@@ -87,11 +87,6 @@ export class HomePage implements OnInit {
             folderModal.present();
           }
         },{
-          icon: 'refresh',
-          handler: () => {
-            window.location.reload();
-          }
-        },{
           icon: 'shuffle',
           cssClass: this.homeModel.menu.isShuffle ? 'menu-active' : '',
           handler: () => {
@@ -122,6 +117,12 @@ export class HomePage implements OnInit {
         {
           icon: 'trash'
         }*/
+        ,{
+          icon: 'refresh',
+          handler: () => {
+            window.location.reload();
+          }
+        }
       ]
     }).present();
   }
