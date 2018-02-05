@@ -35,7 +35,7 @@ export class CallbackService {
 
     this.events.subscribe('settingsPage.imageFrequencyChanged', () => { this.start() });
 
-    // Let some timeout to ensure, that settingsModel already filled its values.
+    // Have some timeout to ensure, that settingsModel already filled its values.
     this.sleepModeTimerSubscription = TimerObservable.create(1000, 5000).subscribe(() => this.sleepModeTimerCallback());
   }
 
@@ -45,7 +45,11 @@ export class CallbackService {
       this.homeModel.currentFolder = val;
 
       if (val !== null && val !== undefined) {
-        this.start();
+
+        // Have some timeout to ensure, that settingsModel already filled its values. Specifically frequency!
+        setTimeout(function() {
+          this.start();
+        }.bind(this), 2000);
       }
     });
   }
