@@ -151,6 +151,10 @@ export class CallbackService {
     this.homeModel.currentBackground = (this.homeModel.currentBackground==this.homeModel.background1) ? this.homeModel.background2 : this.homeModel.background1;
     this.homeModel.currentFolder.currentPhotoIndex = photo.photosetIndex;
 
+    // Must be set every time we change the currentPhotoIndex.
+    this.storage.set('home.imageFolder', this.homeModel.currentFolder);
+
+
     var bgImg = new Image();
     bgImg.onload = () => {
         this.homeModel.currentBackground.nativeElement.style.backgroundImage = `url('${imageURL}')`;
