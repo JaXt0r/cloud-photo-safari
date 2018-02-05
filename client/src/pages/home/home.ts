@@ -80,6 +80,12 @@ export class HomePage implements OnInit {
             let folderModal = this.modalCtrl.create(FolderSwitcher);
             folderModal.present();
           }
+        },
+        {
+          icon: 'refresh',
+          handler: () => {
+            window.location.reload();
+          }
         }
         /*,
         {
