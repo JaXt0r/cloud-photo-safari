@@ -27,7 +27,7 @@ page-home {
   }
 
   .action-sheet-wrapper {
-    max-width: 20em;
+    max-width: 24em;
     button {
       width: 3.5em;
     }
@@ -36,7 +36,7 @@ page-home {
       border-right: 1px solid $list-md-border-color
     }
 
-    button:nth-child(5) {
+    button:nth-child(6) {
       border-right: 1px solid $list-md-border-color
     }
   }
