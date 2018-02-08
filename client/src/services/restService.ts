@@ -16,6 +16,10 @@ export class RestService {
     return this.http.get(this.apiUrl+'/photoset/list');
   }
 
+  getPrevPhoto(photosetId: String, currentPhotoIndex: number) {
+    return this.http.get(`${this.apiUrl}/photoset/prevPhoto/${photosetId}/${currentPhotoIndex}`)    
+  }
+
   getNextPhoto(photosetId: String, currentPhotoIndex: number) {
     return this.http.get(`${this.apiUrl}/photoset/nextPhoto/${photosetId}/${currentPhotoIndex}`)
   }

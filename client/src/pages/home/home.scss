@@ -27,7 +27,7 @@ page-home {
   }
 
   .action-sheet-wrapper {
-    max-width: 24em;
+    max-width: 28em;
     button {
       width: 3.5em;
     }
@@ -36,7 +36,7 @@ page-home {
       border-right: 1px solid $list-md-border-color
     }
 
-    button:nth-child(6) {
+    button:nth-child(7) {
       border-right: 1px solid $list-md-border-color
     }
   }
@@ -44,6 +44,12 @@ page-home {
   .menu-active {
     ion-icon {
       color: color($colors, secondary);
+    }
+  }
+
+  .menu-inactive {
+    ion-icon {
+      color: color($colors,light);
     }
   }
 }

@@ -51,19 +51,24 @@ class PhotosetController : AbstractFlickrController() {
 
     @RequestMapping("randomPhoto/{photosetId}/{prevPhotosetIndex}")
     fun getRandomPhoto(@PathVariable("photosetId") photosetId: String, @PathVariable("prevPhotosetIndex") prevPhotosetIndex: Int): PhotoData {
-        return getImage(photosetId, prevPhotosetIndex, true)
+        return getImage(photosetId, prevPhotosetIndex, isShuffle = true)
     }
 
+
+    @RequestMapping("prevPhoto/{photosetId}/{prevPhotosetIndex}")
+    fun getPrevPhoto(@PathVariable("photosetId") photosetId: String, @PathVariable("prevPhotosetIndex") prevPhotosetIndex: Int): PhotoData {
+        return getImage(photosetId, prevPhotosetIndex, isPrev = true)
+    }
 
     @RequestMapping("nextPhoto/{photosetId}/{prevPhotosetIndex}")
     fun getNextPhoto(@PathVariable("photosetId") photosetId: String, @PathVariable("prevPhotosetIndex") prevPhotosetIndex: Int): PhotoData {
-        return getImage(photosetId, prevPhotosetIndex, false)
+        return getImage(photosetId, prevPhotosetIndex)
     }
 
 
-    private fun getImage(photosetId: String, prevIndex: Int, isShuffle: Boolean): PhotoData {
+    private fun getImage(photosetId: String, prevIndex: Int, isShuffle: Boolean = false, isPrev: Boolean = false): PhotoData {
         val photoset = photosetsIntface.getInfo(photosetId)
-        var index = getIndex(prevIndex, photoset.photoCount, isShuffle)
+        var index = getIndex(prevIndex, photoset.photoCount, isShuffle, isPrev)
 
         val photo = photosetsIntface.getPhotos(photoset.id, 1, index).first()
 
@@ -76,10 +81,16 @@ class PhotosetController : AbstractFlickrController() {
     }
 
 
-    private fun getIndex(prevIndex: Int, photoCount: Int, shuffle: Boolean): Int {
+    private fun getIndex(prevIndex: Int, photoCount: Int, shuffle: Boolean, prev: Boolean): Int {
         var newIndex: Int
 
-        if (shuffle) {
+        if (prev) {
+            if (prevIndex <= 1) {
+                newIndex = photoCount
+            } else {
+                newIndex = prevIndex-1
+            }
+        } else if (shuffle) {
             // Don't deliver original photo again.
             do {
                 // Index is from 1...n

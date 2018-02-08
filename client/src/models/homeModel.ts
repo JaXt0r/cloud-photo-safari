@@ -14,8 +14,9 @@ export class HomeModel {
   public isSleepMode: boolean = false;
 
   public menu = {
-    isShuffle: false,
-    isPaused: false
+    isShuffle:      false,
+    isPaused:       false,
+    isBackwardOnce: false
   }
 
       

@@ -107,11 +107,19 @@ export class HomePage implements OnInit {
               this.callbackService.start();
             }
           }
-        }
-        /*{
-          icon: 'skip-backward'
-        },*/
-        ,{
+        },{
+          icon: 'skip-backward',
+          cssClass: this.homeModel.menu.isShuffle ? 'menu-inactive' : '',
+          handler: () => {
+            if (this.homeModel.menu.isShuffle) {
+              return;
+            }
+            
+            this.callbackService.stop();
+            this.homeModel.menu.isBackwardOnce = true;
+            this.callbackService.start();
+          }
+        },{
           icon: 'skip-forward',
           handler: () => {
             // What a wonderful hack. Erm, I mean usage. :D

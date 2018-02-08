@@ -135,7 +135,13 @@ export class CallbackService {
     if (null !== this.homeModel.currentFolder && undefined !== this.homeModel.currentFolder && !this.homeModel.isLoadingImage) {
       this.homeModel.isLoadingImage = true;
 
-      if (this.homeModel.menu.isShuffle) {
+      if (this.homeModel.menu.isBackwardOnce) {
+        this.homeModel.menu.isBackwardOnce = false;
+        this.rest.getPrevPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe(
+          (photo) => this.photoCallback(photo),
+          () => this.homeModel.isLoadingImage = false
+        );
+      } else if (this.homeModel.menu.isShuffle) {
         this.rest.getRandomPhoto(this.homeModel.currentFolder.id, this.homeModel.currentFolder.currentPhotoIndex).subscribe(
           (photo) => this.photoCallback(photo),
           () => this.homeModel.isLoadingImage = false
