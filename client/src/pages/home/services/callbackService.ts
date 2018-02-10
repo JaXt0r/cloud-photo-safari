@@ -161,7 +161,12 @@ export class CallbackService {
    * @param photo 
    */
   private photoCallback(photo: any) {
-    let imageURL = photo.sizes.large_1600.url;
+    let imageURL = photo.sizes.original.url;
+
+    if (undefined !== photo.sizes.large_1600) {
+      imageURL = photo.sizes.large_1600.url;
+    }
+
     this.homeModel.currentBackground = (this.homeModel.currentBackground==this.homeModel.background1) ? this.homeModel.background2 : this.homeModel.background1;
     this.homeModel.currentFolder.currentPhotoIndex = photo.photosetIndex;
 
