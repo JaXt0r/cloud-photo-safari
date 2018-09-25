@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+/**
+ * Authorize app to be used by my user.
+ *
+ * Hints:
+ *   * Must be called only once per app. (normally)
+ *   * But after a year (2017-208) I need to called it again.
+ */
 @RestController
 @RequestMapping("/authorize/")
 public class AuthorizeController {
@@ -27,6 +34,9 @@ public class AuthorizeController {
   private Token accessToken;
 
 
+  /**
+   * Ask for login code
+   */
   @RequestMapping("1")
   public String authorize1() {
     AuthInterface authInterface = flickrService.getFlickr().getAuthInterface();
@@ -39,6 +49,9 @@ public class AuthorizeController {
   }
 
 
+  /**
+   * Paste the return code into this URL.
+   */
   @RequestMapping("2/{authorizeToken}")
   public void authorize2(@PathVariable("authorizeToken") String authorizeToken) throws FlickrException, IOException {
     AuthInterface authInterface = flickrService.getFlickr().getAuthInterface();

@@ -37,7 +37,7 @@ class PhotosetController : AbstractFlickrController() {
 
         var response = photosets.jmap(Photoset::class.java, PhotosetData::class.java)
 
-        // Add URL from response. Don't load all sizes manually because everz photoset would generate another call.
+        // Add URL from response. Don't load all sizes manually because every photoset would generate another call.
         response.forEach {
             val convertedPhoto = it
             val origPhoto = photosets.first { it.id == convertedPhoto.id }.primaryPhoto
