@@ -32,8 +32,7 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
+      <artifactId>spring-boot-starter-websocket</artifactId>
     </dependency>
 
     <dependency>
@@ -48,7 +47,6 @@
       <!-- Need to use CR2 candidate, because previous version throws linkage error: https://github.com/jmapper-framework/jmapper-core/issues/60 -->
       <version>1.6.1.CR2</version>
     </dependency>
-
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
